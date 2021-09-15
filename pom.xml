@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright (c) 2020 - 2021 Henix, henix.fr
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.opentestfactory</groupId>
+    <artifactId>tf-toolkit</artifactId>
+    <version>1.0.0.RC6-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>OpenTestFactory java toolkit.</name>
+
+    <inceptionYear>2020</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>Apache License V2</name>
+        </license>
+    </licenses>
+    <organization>
+        <name>Henix</name>
+        <url>henix.fr</url>
+    </organization>
+    
+    <scm>
+        <connection>scm:git:${project.basedir}</connection>
+        <developerConnection>scm:git:${project.basedir}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <license.name>Apache-V2</license.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <jackson.version>2.11.2</jackson.version>
+        <maven.license.version>3.0</maven.license.version>
+    </properties>
+    <distributionManagement>
+        <repository>
+          <id>squash-release-deploy-repo</id>
+          <name>Squash releases deployment repo</name>
+          <url>${deploy-repo.release.url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>squash-snapshot-deploy-repo</id>
+          <name>Squash snapshots deployment repo</name>
+          <url>${deploy-repo.snapshot.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <modules>
+        <module>otf-messages</module>
+        <module>tf-microservice-components</module>
+        <module>test-harness-tools</module>
+        <module>it-parent</module>
+        <module>cfgadapter</module>
+        <module>tf-jackson-dto</module>
+    </modules>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${maven.license.version}</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <strictCheck>true</strictCheck>
+                        <header>license_conf/${license.name}-license-header.txt</header>
+                        <properties>
+                            <license.yearSpan>${license.inception.year} - ${license.current.year}</license.yearSpan>
+                            <license.copyrightOwner>${project.organization.name}, ${project.organization.url}</license.copyrightOwner>
+                            <license.inception.year>${project.inceptionYear}</license.inception.year>
+                            <!-- 
+                            This license current year is computed. If we wanted to rebuild an old version without
+                            changing license headers, we would just need to add -Dlicense.current.year=XXX to the maven command line.
+                            -->
+                            <license.current.year>${license.current.year}</license.current.year>
+                            <project.organization.name>${project.organization.name}</project.organization.name>
+                            <project.organization.url>${project.organization.url}</project.organization.url>
+                        </properties>
+                        <useDefaultExcludes>false</useDefaultExcludes>
+                        <excludes>
+                            <!-- Tooling-related files -->
+                            <exclude>**/.checkstyle</exclude><!-- Look into this one : I think it's obsolete ! -->
+                            <!-- Git related parm files we don't knwo how to put headers into -->
+                            <exclude>.gitignore</exclude>
+                            <exclude>.gitattributes</exclude>
+                            <exclude>.git/**</exclude>
+                            <!-- No point to put the license header in the license file -->
+                            <exclude>LICENSE</exclude>
+                            <!-- 
+                            One day, we might want to remove this from here 
+                            and issue an intelliJ-specific mvn settings advisory instead 
+                            -->
+                            <exclude>**/.idea/**</exclude>
+                            <exclude>.idea/**</exclude>
+                            <exclude>**/*.iml</exclude>
+                            <exclude>**/target/**</exclude>
+                            <exclude>**/*.json</exclude>
+                            <exclude>release.properties</exclude>
+                        </excludes>
+                        <mapping>
+                            <xml_eng>XML_STYLE</xml_eng>
+                            <xml_fra>XML_STYLE</xml_fra>
+                            <xslt>XML_STYLE</xslt>
+                            <desktop>SCRIPT_STYLE</desktop>
+                            <Makefile>SCRIPT_STYLE</Makefile>
+                            <Jenkinsfile>JAVADOC_STYLE</Jenkinsfile>
+                            <md>XML_STYLE</md>
+                        </mapping>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>license.current.year</name>
+                            <pattern>yyyy</pattern>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+			<phase>initialize</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>add-windows-hg-hooks</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmaven</groupId>
+                        <artifactId>groovy-maven-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>add-windows-hg-hooks</id>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <phase>process-resources</phase>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <source>${project.basedir}/src/main/scripts/AddWindowsGitHooks.groovy</source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>add-unix-like-hg-hooks</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmaven</groupId>
+                        <artifactId>groovy-maven-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>aadd-unix-like-hg-hooks</id>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <phase>process-resources</phase>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <source>${project.basedir}/src/main/scripts/Add_NixGitHooks.groovy</source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release-logic</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmaven</groupId>
+                        <artifactId>gmaven-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>release-logic</id>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <source>src/main/scripts/preRelease.groovy</source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
