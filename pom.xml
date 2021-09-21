@@ -153,6 +153,7 @@
                             <Makefile>SCRIPT_STYLE</Makefile>
                             <Jenkinsfile>JAVADOC_STYLE</Jenkinsfile>
                             <md>XML_STYLE</md>
+                            <java>SLASHSTAR_STYLE</java>
                         </mapping>
                     </configuration>
                 </plugin>
