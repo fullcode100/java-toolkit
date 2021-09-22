@@ -1,0 +1,22 @@
+{
+  "apiVersion": "opentestfactory.org/v1alpha1",
+  "kind": "ExecutionResult",
+  "metadata": {
+    "name": "Generated Job",
+    "workflow_id":"123456789",
+    "job_id": "job_id",
+    "step_id": "step_id",
+    "step_origin": [
+        "000",
+        "001",
+        "002"
+    ],
+    "step_sequence_id": 123456,
+    "is_last_step": true
+  },
+  "attachments": [
+        "log.html",
+        "src/test/resources/passing-output.xml",
+        "report.html"
+  ]
+}

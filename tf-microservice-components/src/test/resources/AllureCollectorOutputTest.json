@@ -1,0 +1,20 @@
+{
+  "apiVersion": "opentestfactory.org/v1alpha1",
+  "kind": "AllureCollectorOutput",
+  "metadata": {
+    "name": "explicitJob",
+    "workflow_id": "3fe399eb-b765-4c5a-ab10-35106bce6a6d",
+    "job_id": "f00f1457-6615-491a-8e61-4759ed86e9a8",
+    "job_origin": ["job_id_01", "job_id_02"],
+    "labels": {
+      "opentestfactory.org/category": "tm.generator",
+      "opentestfactory.org/categoryPrefix": "tm.squashtest.org",
+      "opentestfactory.org/categoryVersion": "v1"
+    },
+    "creationTimestamp": "2020-10-15T11:53:51.711657"
+  },
+  "with": {
+    "testPlanId": "1234",
+    "allureReport": "path/to/allureReport"
+  }
+}
