@@ -86,7 +86,7 @@ pipeline{
                     }
                     sh 'git checkout -b release-${RELEASE_VERSION}'
                     sh 'mvn -B release:prepare release:perform'
-                    withCredentials([usernamePassword(credentialsId: 'jenkins-bitbucket-credentials-lmdp', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){
+                    withCredentials([usernamePassword(credentialsId: 'jenkins-gitlab-creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){
                         sh 'git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"'
                         sh 'git push --set-upstream origin release-${RELEASE_VERSION};git push --tags'
                         sh 'git fetch origin dev +refs/heads/dev:refs/remotes/origin/dev;git checkout -b dev origin/dev;git merge release-${RELEASE_VERSION};git push --set-upstream origin dev'
