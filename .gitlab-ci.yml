@@ -19,7 +19,7 @@ stages:
 
 checkstyle:
   stage: checkstyle
-  image: maven:3.3.9-jdk-8
+  image: maven:3.8.2-jdk-11
   script:
     - echo "Running google-java-format based checks"
     - src/main/scripts/google-code-check.sh
