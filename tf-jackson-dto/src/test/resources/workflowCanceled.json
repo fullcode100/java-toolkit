@@ -1,0 +1,16 @@
+{
+    "apiVersion": "opentestfactory.org/v1alpha1",
+    "kind": "WorkflowCanceled",
+    "metadata": {
+        "name": "Simple Workflow",
+        "annotations": {
+            "opentestfactory.org/ordering": [["explicitJob"]]
+        },
+        "creationTimestamp": "2021-10-07T14:36:22.224879",
+        "workflow_id": "ed7218b6-05d9-49d9-920c-0d6789f77bc9"
+    },
+    "details": {
+        "reason": "",
+        "status": "failure"
+    }
+}
