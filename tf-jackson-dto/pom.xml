@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.RC7-SNAPSHOT</version>
+        <version>1.0.0.RC7</version>
     </parent>
     <artifactId>tf-jackson-dto</artifactId>
     <packaging>jar</packaging>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.RC7-SNAPSHOT</version>
+            <version>1.0.0.RC7</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
