@@ -19,4 +19,4 @@
 mkdir -p target
 mvn dependency:copy -Dartifact=com.google.googlejavaformat:google-java-format:1.11.0:jar:all-deps -DoutputDirectory=target
 find . -type f -name "*.java" > target/google-format-files
-java -jar ~/tools/google-java-format-1.11.0-all-deps.jar --set-exit-if-changed --dry-run @target/google-format-files 
+java -jar target/google-java-format-1.11.0-all-deps.jar --set-exit-if-changed --dry-run @target/google-format-files 
