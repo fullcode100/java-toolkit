@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.RC8-SNAPSHOT</version>
+        <version>1.0.0.dev202111-SNAPSHOT</version>
     </parent>
     <artifactId>TFMessages</artifactId>
     <packaging>jar</packaging>
