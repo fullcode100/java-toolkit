@@ -48,4 +48,4 @@ if [ $status -ne 0 ]; then
     exit 1
 fi
 
-echo "All checked file comply with the required code format."
+echo "All checked files comply with the required code format."
