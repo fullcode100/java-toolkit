@@ -39,3 +39,13 @@ fi
 
 echo "All checked files have conformant headers"
 rm $log
+
+src/main/scripts/google-code-check.sh
+status=$?
+
+if [ $status -ne 0 ]; then
+    echo Code format check failed
+    exit 1
+fi
+
+echo "All checked file comply with the required code format."
