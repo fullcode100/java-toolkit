@@ -49,6 +49,10 @@
             <version>2.8.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
