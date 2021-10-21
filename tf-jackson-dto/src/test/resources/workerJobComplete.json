@@ -1,0 +1,14 @@
+{
+    "apiVersion": "opentestfactory.org/v1alpha1",
+    "metadata": {
+        "workflow_id": "1ac33509-c514-4805-86e9-f728f3df8eea",
+        "name": "TM Publisher Worker"
+    },
+    "spec": {
+        "worker": {
+            "worker_id": "2080ab78-3dd5-47fe-a0ac-714a1702b95d",
+            "status": "teardown"
+        }
+    },
+    "kind": "Notification"
+}
