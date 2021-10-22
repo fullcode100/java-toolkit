@@ -22,7 +22,7 @@
                 }
             },
             "additionalProperties": true,
-            "required": ["name", "workflow_id", "job_id", "job_origin"]
+            "required": ["name", "workflow_id"]
         },
         "with": {
             "anyOf": [

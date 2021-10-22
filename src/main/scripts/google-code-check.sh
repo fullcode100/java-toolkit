@@ -15,8 +15,10 @@
 #  limitations under the License.
 #
 
+if [ ! -r target/google-java-format-1.11.0-all-deps.jar ]; then
+	mkdir -p target
+	mvn dependency:copy -Dartifact=com.google.googlejavaformat:google-java-format:1.11.0:jar:all-deps -DoutputDirectory=target
+fi
 
-mkdir -p target
-mvn dependency:copy -Dartifact=com.google.googlejavaformat:google-java-format:1.11.0:jar:all-deps -DoutputDirectory=target
 find . -type f -name "*.java" > target/google-format-files
 java -jar target/google-java-format-1.11.0-all-deps.jar --set-exit-if-changed --dry-run @target/google-format-files 

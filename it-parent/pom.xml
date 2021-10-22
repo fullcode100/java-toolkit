@@ -21,7 +21,7 @@
 
     <groupId>org.opentestfactory</groupId>
     <artifactId>tf.it.parent</artifactId>
-    <version>1.0.0.Issue11-SNAPSHOT</version>
+    <version>1.0.0.RC9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>org.opentestfactory</groupId>
                 <artifactId>test-harness-tools</artifactId>
-                <version>1.0.0.Issue11-SNAPSHOT</version>
+                <version>1.0.0.RC9-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

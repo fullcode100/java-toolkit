@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.Issue11-SNAPSHOT</version>
+        <version>1.0.0.RC9-SNAPSHOT</version>
     </parent>
     <artifactId>tf-jackson-dto</artifactId>
     <packaging>jar</packaging>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.Issue11-SNAPSHOT</version>
+            <version>1.0.0.RC9-SNAPSHOT</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
@@ -49,7 +49,10 @@
             <version>2.8.0</version>
             <scope>test</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
         <dependency>
             <groupId>net.javacrumbs.json-unit</groupId>
             <artifactId>json-unit</artifactId>
