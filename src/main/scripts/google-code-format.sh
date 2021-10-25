@@ -15,10 +15,14 @@
 #  limitations under the License.
 #
 
-if [ ! -r target/google-java-format-1.11.0-all-deps.jar ]; then
+GOOGLE_CODE_VERSION=1.11.0
+
+GOOGLE_CODE_FILE=target/google-java-format-${GOOGLE_CODE_VERSION}-all-deps.jar
+
+if [ ! -r ${GOOGLE_CODE_FILE} ]; then
 	mkdir -p target
-	mvn dependency:copy -Dartifact=com.google.googlejavaformat:google-java-format:1.11.0:jar:all-deps -DoutputDirectory=target
+	mvn dependency:copy -Dartifact=com.google.googlejavaformat:google-java-format:${GOOGLE_CODE_VERSION}:jar:all-deps -DoutputDirectory=target
 fi
 
 find . -type f -name "*.java" > target/google-format-files
-java -jar target/google-java-format-1.11.0-all-deps.jar -i @target/google-format-files 
+java -jar ${GOOGLE_CODE_FILE} -i @target/google-format-files 
