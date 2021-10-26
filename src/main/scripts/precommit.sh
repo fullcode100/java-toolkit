@@ -44,7 +44,7 @@ src/main/scripts/google-code-check.sh
 status=$?
 
 if [ $status -ne 0 ]; then
-    echo Code format check failed. To draft formatting changes, please run the following :
+    echo Code format check failed. To draft formatting changes, please run the following:
     echo ./src/main/scripts/google-code-format.sh
     exit 1
 fi
