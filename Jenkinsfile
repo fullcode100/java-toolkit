@@ -17,6 +17,8 @@ pipeline{
     agent {label 'maven-builder-jdk11'}
     environment{
         RELEASE_BRANCH='main'
+        //TODO Switch back to dev when merging dev-2021-11 into dev
+        DEV_BRANCH='dev-2021-11'
     }
     stages {
         stage('DNS workaround'){
@@ -89,7 +91,7 @@ pipeline{
                     withCredentials([usernamePassword(credentialsId: 'jenkins-gitlab-creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){
                         sh 'git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"'
                         sh 'git push --set-upstream origin release-${RELEASE_VERSION};git push --tags'
-                        sh 'git fetch origin dev +refs/heads/dev:refs/remotes/origin/dev;git checkout -b dev origin/dev;git merge release-${RELEASE_VERSION};git push --set-upstream origin dev'
+                        sh 'git fetch origin ${DEV_BRANCH} +refs/heads/${DEV_BRANCH}:refs/remotes/origin/${DEV_BRANCH};git checkout -b ${DEV_BRANCH} origin/${DEV_BRANCH};git merge release-${RELEASE_VERSION};git push --set-upstream origin ${DEV_BRANCH}'
                     }
                 }
             }
