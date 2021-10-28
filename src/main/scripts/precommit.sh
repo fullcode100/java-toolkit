@@ -23,14 +23,14 @@ mvn -o -DskipTests org.codehaus.mojo:build-helper-maven-plugin:timestamp-propert
 status=$?
 
 if [ $status -ne 0 ]; then
-	echo "*** Failed : some license headers are missing or non-conformant ***"
+	echo "*** Failed: some license headers are missing or non-conformant ***"
 	grep Missing $log| cut -d"]" -f 2
 	if [ $(grep Missing $log | wc -l) -eq 0 ]; then
 		echo "*** No missing header found, see log in target/precommit.log"
 		mkdir -p target
 		mv $log target/precommit.log
 	else
-		echo "To draft license editing, please run the following :"
+		echo "To draft license editing, please run the following:"
 		echo mvn org.codehaus.mojo:build-helper-maven-plugin:timestamp-property@timestamp-property license:format license:format@Modified-by license:format@OriginalCopyright
 		rm $log
 	fi
@@ -39,3 +39,14 @@ fi
 
 echo "All checked files have conformant headers"
 rm $log
+
+src/main/scripts/google-code-check.sh
+status=$?
+
+if [ $status -ne 0 ]; then
+    echo Code format check failed. To draft formatting changes, please run the following:
+    echo ./src/main/scripts/google-code-format.sh
+    exit 1
+fi
+
+echo "All checked files comply with the required code format."
