@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.RC10-SNAPSHOT</version>
+        <version>3.0.1.Issue18-SNAPSHOT</version>
     </parent>
     <artifactId>tf-microservice-components</artifactId>
     <packaging>jar</packaging>
@@ -37,12 +37,12 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.RC10-SNAPSHOT</version>
+            <version>3.0.1.Issue18-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>tf-jackson-dto</artifactId>
-            <version>1.0.0.RC10-SNAPSHOT</version>
+            <version>3.0.1.Issue18-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
