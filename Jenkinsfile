@@ -17,8 +17,7 @@ pipeline{
     agent {label 'maven-builder-jdk11'}
     environment{
         RELEASE_BRANCH='main'
-        //TODO Switch back to dev when merging dev-2021-11 into dev
-        DEV_BRANCH='dev-2021-11'
+        DEV_BRANCH='dev-2021-12'
     }
     stages {
         stage('DNS workaround'){

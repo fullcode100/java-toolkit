@@ -18,9 +18,9 @@
      },
     "step_sequence_id": 123456,
     "attachments": {
-        "log.html": {"uuid": "111-222-333","type":"text/vnd.opentestfactory.robotframework-log+html"},
-        "src/test/resources/passing-output.xml": {"uuid": "444-555-666","type":"text/vnd.opentestfactory.robotframework-output+xml"},
-        "report.html": {"uuid": "777-888-999","type":"text/vnd.opentestfactory.robotframework-report+html"}
+        "log.html": {"uuid": "111-222-333"},
+        "src/test/resources/passing-output.xml": {"uuid": "444-555-666"},
+        "report.html": {"uuid": "777-888-999"}
     },
     "is_last_step": true
   },
