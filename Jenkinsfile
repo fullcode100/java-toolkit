@@ -17,7 +17,7 @@ pipeline{
     agent {label 'maven-builder-jdk11'}
     environment{
         RELEASE_BRANCH='main'
-        DEV_BRANCH='dev'
+        DEV_BRANCH='dev-2021-12'
     }
     stages {
         stage('DNS workaround'){
