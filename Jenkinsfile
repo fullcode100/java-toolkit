@@ -49,7 +49,7 @@ pipeline{
             }
             steps {
                 container('maven'){
-                    sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test'
+                    sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report'
                     withSonarQubeEnv('SonarQube'){
                         sh 'mvn -Dsonar.scm.disabled=true sonar:sonar'
                     }
