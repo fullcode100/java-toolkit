@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opentestfactory</groupId>
     <artifactId>tf-toolkit</artifactId>
-    <version>1.0.0.4454-SNAPSHOT</version>
+    <version>1.0.0.202201-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>OpenTestFactory java toolkit.</name>
 
