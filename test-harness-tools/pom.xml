@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf.it.parent</artifactId>
-        <version>1.0.0.4638-SNAPSHOT</version>
+        <version>1.0.0.4673-SNAPSHOT</version>
         <relativePath>../it-parent</relativePath>
     </parent>
     
