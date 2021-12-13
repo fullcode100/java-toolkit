@@ -36,12 +36,22 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.4673-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>tf-jackson-dto</artifactId>
-            <version>1.0.0.4673-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
