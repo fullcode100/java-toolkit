@@ -101,6 +101,7 @@
         <module>cfgadapter</module>
         <module>tf-jackson-dto</module>
         <module>java-utils</module>
+        <module>test-utils</module>
     </modules>
     <build>
         <pluginManagement>
