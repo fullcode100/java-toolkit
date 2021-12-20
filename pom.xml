@@ -95,6 +95,7 @@
         <module>it-parent</module>
         <module>cfgadapter</module>
         <module>tf-jackson-dto</module>
+        <module>test-utils</module>
     </modules>
     <build>
         <pluginManagement>
