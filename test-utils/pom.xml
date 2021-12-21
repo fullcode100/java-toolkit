@@ -22,7 +22,7 @@
     <parent>
         <artifactId>tf-toolkit</artifactId>
         <groupId>org.opentestfactory</groupId>
-        <version>1.0.0.202201-SNAPSHOT</version>
+        <version>${revision}${sha1}${changelist}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

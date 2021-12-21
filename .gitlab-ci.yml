@@ -14,14 +14,8 @@
 #  limitations under the License.
 #
 
-stages:
-  - checkstyle
-
-checkstyle:
-  stage: checkstyle
-  image: maven:3.8.2-jdk-11
-  script:
-    - echo "Running google-java-format based checks"
-    - src/main/scripts/google-code-check.sh
-
+include:
+  - project: 'opentestfactory/ci-common/java-ci'
+    ref: main
+    file: 'gitlab-ci-java.yml'
 
