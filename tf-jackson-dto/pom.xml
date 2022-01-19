@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-     Copyright (c) 2020 - 2021 Henix, henix.fr
+     Copyright (c) 2020 - 2022 Henix, henix.fr
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.Issue23-SNAPSHOT</version>
+        <version>${revision}${sha1}${changelist}</version>
     </parent>
     <artifactId>tf-jackson-dto</artifactId>
     <packaging>jar</packaging>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.Issue23-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
