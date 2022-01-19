@@ -92,7 +92,7 @@ In this case, you will annotate the inbox method as for a legacy version, but yo
 
 `<inverted namespace parts>.json.schema.<version part>`
 
-For example, for the message of kind `MessageFromMyOtherPlugin` in namespace `com.example.custom`, version 1:
+For example, for the message of kind `MessageFromMyOtherPlugin` in namespace `custom.example.com`, version 1:
 
 * Inbox annotation:
 
@@ -103,7 +103,7 @@ For example, for the message of kind `MessageFromMyOtherPlugin` in namespace `co
      @Path("/inbox")
      @ExpectedKind(
         value="MessageFromMyOtherPlugin",
-        apiVersion="com.example.custom/v1"
+        apiVersion="custom.example.com/v1"
      )
      public Status incomingEvent(MessageFromMyOtherPlugin command){
   ```
