@@ -52,7 +52,7 @@
             <dependency>
                 <groupId>org.opentestfactory</groupId>
                 <artifactId>test-harness-tools</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}${sha1}${changelist}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
