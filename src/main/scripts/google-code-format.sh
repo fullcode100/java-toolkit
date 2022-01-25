@@ -1,6 +1,6 @@
 #!/bin/sh -xe
 #
-#  Copyright (c) 2020 - 2021 Henix, henix.fr
+#  Copyright (c) 2020 - 2022 Henix, henix.fr
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.

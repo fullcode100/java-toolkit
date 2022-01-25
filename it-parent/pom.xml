@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-     Copyright (c) 2020 - 2021 Henix, henix.fr
+     Copyright (c) 2020 - 2022 Henix, henix.fr
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,13 +21,17 @@
 
     <groupId>org.opentestfactory</groupId>
     <artifactId>tf.it.parent</artifactId>
-    <version>1.0.0.Issue20-SNAPSHOT</version>
+    <version>${revision}${sha1}${changelist}</version>
     <packaging>pom</packaging>
 
     <properties>
         <java.version>11</java.version>
         <maven.license.version>3.0</maven.license.version>
         <license.name>Apache-V2</license.name>
+        <!-- version default -->
+        <revision>1.0.0</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <sha1>.202201</sha1>
     </properties>
     
     <distributionManagement>
@@ -48,7 +52,7 @@
             <dependency>
                 <groupId>org.opentestfactory</groupId>
                 <artifactId>test-harness-tools</artifactId>
-                <version>1.0.0.Issue20-SNAPSHOT</version>
+                <version>${revision}${sha1}${changelist}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -63,21 +67,6 @@
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M2</version>
-                    <configuration>
-                        <failFast>true</failFast>
-                        <rules>
-                            <requireProperty>
-                                <property>org.opentestfactory.test.cfg</property>
-                                <message>"Property 'org.opentestfactory.test.cfg' must be set. It specifies where to find the configuration
-                                    file with SUT endpoint URLs."</message>
-                            </requireProperty>
-                        </rules>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -111,31 +100,49 @@
             </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.outbrain.swinfra</groupId>
+                <artifactId>ci-friendly-flatten-maven-plugin</artifactId>
+                <version>1.0.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- Ensure proper cleanup. Will run on clean phase-->
+                            <goal>clean</goal>
+                            <!-- Enable ci-friendly version resolution. Will run on process-resources phase-->
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <profiles>
-    <profile>
-		<id>release-logic</id>
-		<build>
-			<plugins>
-				<plugin>
-		                        <groupId>org.codehaus.gmaven</groupId>
-                		        <artifactId>gmaven-plugin</artifactId>
-                        		<version>1.5</version>
-                        		<executions>
-                            			<execution>
-                                			<id>release-logic</id>
-                                			<goals>
-                                    				<goal>execute</goal>
-                                			</goals>
-                                			<phase>generate-sources</phase>
-                                			<configuration>
-								<source>src/main/scripts/preRelease.groovy</source>
-                                			</configuration>
-                            			</execution>
-                        		</executions>
-				</plugin>
-			</plugins>
-		</build>
-	</profile>
+        <profile>
+            <id>integration-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.0.0-M2</version>
+                        <configuration>
+                            <failFast>true</failFast>
+                            <rules>
+                                <requireProperty>
+                                    <property>org.opentestfactory.test.cfg</property>
+                                    <message>"Property 'org.opentestfactory.test.cfg' must be set. It specifies where to find the configuration
+                                        file with SUT endpoint URLs."</message>
+                                </requireProperty>
+                            </rules>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
