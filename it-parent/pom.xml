@@ -30,8 +30,8 @@
         <license.name>Apache-V2</license.name>
         <!-- version default -->
         <revision>1.0.0</revision>
+        <sha1></sha1>
         <changelist>-SNAPSHOT</changelist>
-        <sha1>.202201</sha1>
     </properties>
     
     <distributionManagement>
