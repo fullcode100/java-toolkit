@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-     Copyright (c) 2020 - 2021 Henix, henix.fr
+     Copyright (c) 2020 - 2022 Henix, henix.fr
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,13 +21,18 @@
     <parent>
         <groupId>org.opentestfactory</groupId>
         <artifactId>tf-toolkit</artifactId>
-        <version>1.0.0.RC10-SNAPSHOT</version>
+        <version>${revision}${sha1}${changelist}</version>
     </parent>
     <artifactId>tf-jackson-dto</artifactId>
     <packaging>jar</packaging>
     <name>tf-jackson-dto</name>
     
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.33</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -36,7 +41,7 @@
         <dependency>
             <groupId>org.opentestfactory</groupId>
             <artifactId>TFMessages</artifactId>
-            <version>1.0.0.RC10-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
@@ -57,6 +62,18 @@
             <groupId>net.javacrumbs.json-unit</groupId>
             <artifactId>json-unit</artifactId>
             <version>2.18.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.17.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

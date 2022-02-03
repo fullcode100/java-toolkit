@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-     Copyright (c) 2020 - 2021 Henix, henix.fr
+     Copyright (c) 2020 - 2022 Henix, henix.fr
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opentestfactory</groupId>
     <artifactId>tf-toolkit</artifactId>
-    <version>1.0.0.RC10-SNAPSHOT</version>
+    <version>${revision}${sha1}${changelist}</version>
     <packaging>pom</packaging>
     <name>OpenTestFactory java toolkit.</name>
 
@@ -49,6 +49,13 @@
         <maven.compiler.target>8</maven.compiler.target>
         <jackson.version>2.11.2</jackson.version>
         <maven.license.version>3.0</maven.license.version>
+        <!-- version default -->
+        <revision>1.0.0</revision>
+        <sha1></sha1>
+        <changelist>-SNAPSHOT</changelist>
+        <!--  for Sonarqube -->
+        <sonar.projectKey>${project.groupId}:${project.artifactId}${env.APPEND_SONAR_PROJECT_KEY}</sonar.projectKey>
+        <sonar.projectName>${project.Name}${env.APPEND_SONAR_PROJECT_NAME}</sonar.projectName>
     </properties>
     <distributionManagement>
         <repository>
@@ -95,6 +102,7 @@
         <module>it-parent</module>
         <module>cfgadapter</module>
         <module>tf-jackson-dto</module>
+        <module>test-utils</module>
     </modules>
     <build>
         <pluginManagement>
@@ -137,6 +145,7 @@
                             <exclude>.gitignore</exclude>
                             <exclude>.gitattributes</exclude>
                             <exclude>.git/**</exclude>
+                            <exclude>.m2/**</exclude>
                             <!-- No point to put the license header in the license file -->
                             <exclude>LICENSE</exclude>
                             <!-- 
@@ -165,6 +174,21 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>com.outbrain.swinfra</groupId>
+                <artifactId>ci-friendly-flatten-maven-plugin</artifactId>
+                <version>1.0.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- Ensure proper cleanup. Will run on clean phase-->
+                            <goal>clean</goal>
+                            <!-- Enable ci-friendly version resolution. Will run on process-resources phase-->
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -250,30 +274,6 @@
                                 <inherited>false</inherited>
                                 <configuration>
                                     <source>${project.basedir}/src/main/scripts/Add_NixGitHooks.groovy</source>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>release-logic</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.gmaven</groupId>
-                        <artifactId>gmaven-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>release-logic</id>
-                                <goals>
-                                    <goal>execute</goal>
-                                </goals>
-                                <phase>generate-sources</phase>
-                                <configuration>
-                                    <source>src/main/scripts/preRelease.groovy</source>
                                 </configuration>
                             </execution>
                         </executions>

@@ -1,4 +1,6 @@
 target
+#flattened files
+.ci-friendly-pom.xml
 #IntelliJ generated files
 .idea/*
 *.iml
