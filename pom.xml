@@ -50,7 +50,7 @@
         <jackson.version>2.11.2</jackson.version>
         <maven.license.version>3.0</maven.license.version>
         <!-- version default -->
-        <revision>1.0.0</revision>
+        <revision>2.0.0</revision>
         <sha1></sha1>
         <changelist>-SNAPSHOT</changelist>
         <!--  for Sonarqube -->
