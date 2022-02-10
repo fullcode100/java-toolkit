@@ -27,7 +27,7 @@
     <artifactId>java-plugin-utils</artifactId>
     <packaging>jar</packaging>
     
-    <name>Miscellanous utilities for OTF pugins</name>
+    <name>Miscellanous utilities for OTF plugins</name>
     <description>
         This module provide various non-plugin-ish utilities needed by java OTF plugins.
         This module may be split if it appears to grow beyond a few classes 
