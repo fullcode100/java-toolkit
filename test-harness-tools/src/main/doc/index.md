@@ -225,7 +225,7 @@ Here is an example of a varibilized json payload :
   "metadata": {
     "workflow_id": #{workflow_uuid}
   },
-  jobs:{
+  "jobs" : {
   
   }
 }
