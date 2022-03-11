@@ -31,7 +31,7 @@ These test resources  are expected to be json payloads.
 
 ## Contents
 
-[//]: # (As there is no automatic TOC in markdown, manually maintained :'( - this is a comment by the way !)
+<!-- (As there is no automatic TOC in markdown, manually maintained :'( - this is a comment by the way !) -->
 
 * [Getting started](#getting-started)
 * [Anatomy of a failure](#anatomy-of-a-failure) 
