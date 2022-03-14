@@ -17,14 +17,14 @@
 -->
 # OpenTestFactory Integration test harness
 
-Main principle : the harness is based on the Junit framework. It uses [MockServer](https://www.mock-server.com/mock_server/getting_started.html#request_properties_matchers)
+Main principle: the harness is based on the Junit framework. It uses [MockServer](https://www.mock-server.com/mock_server/getting_started.html#request_properties_matchers)
 to setup a mock listening for callbacks from the system under test.
-As an outline, an integration test case consists in :
+As an outline, an integration test case consists in:
 
 1. Setting up expected answers using the ExpectedOutputReceiver instance provided by the test class
 2. Sending one or more (most of the time only one, seeing as you're trying to test a well defined test case) messages to the SUT
     using one of the dedicated sendTestMessage/sendTemplatedTestMessage test class methods.
-5. Asking the test harness to check that received request conform to expectations.
+5. Asking the test harness to check that received requests conform to expectations.
 
 Sent and expected messages are referenced as test resource names pointing to text resources from the src/test/resource test.
 These test resources  are expected to be json payloads.
@@ -102,7 +102,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
         ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString()) //each call to this adds a key-value mapping to substitute in message templates
-                .withExpectedRequestTemplate( /* This means the message to expectd is defined as a message templates where place holder keys will be
+                .withExpectedRequestTemplate( /* This means the expect message is defined as a message templates where place holder keys will be
                                                * replaced with the values value defined above.*/
                         "/publications", //This path is the same as the path used in the relevant subscription test resource
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json") //This is the expected message resource name
@@ -124,21 +124,21 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
 ```
 
-When using the ExpectedOutputReceiver, remember that it is a immutable object, so you must chain all calls as chown in the sample above. 
+When using the ExpectedOutputReceiver, remember that it is an immutable object, so you must chain all calls as chown in the sample above. 
 
 <a name="anatomy-of-a-failure" />
 
 ## Anatomy of a failure
 
-When An assertion fails, the message will look as in the example below. The stacktrace at the end is irrelevant.
+When an assertion fails, the message will look as in the example below. The stacktrace at the end is irrelevant.
 It shows where the AssertionError was thrown from in the test code, but you already know that from the test name.
 
-The important parts are ``expected<   here is your expected json >`` and ``but was < zero or more json payloads >``
+The important parts are ``expected <here is your expected json>`` and ``but was < zero or more json payloads >``
 
-* If the actual part reads ``but was <>``, it means no reponse was detected. Either you got the expected pathWrong
+* If the actual part reads ``but was <>``, it means no reponse was detected. Either you got the expected path wrong
 (remember, it must match the path from the subscription envelope), or no response was received. In the latter case,
-you have to check microservice logs to look for error traces or clues as to what prevented your expected event from being
-fired.
+you have to check the microservice logs to look for error traces or clues as to what prevented your expected event from 
+being fired.
 
 * If the actual part contains one or more json trees, events where received but did not match the expectations.
 From there, you need to compare them with the expected payload.
@@ -210,8 +210,8 @@ java.lang.AssertionError: Expected request payload not found : expected<{
 Variable mappings are used to insert computed values from the junit test code into test resources.
 
 To use a variable mapping, you need to do as follows :
-1. Insert a pace holder in the test resource.
-As of 2020/11/23, variable may only be used to desfine a whole json string or integer attroibute value.
+1. Insert a place holder in the test resource.
+As of 2022/03/14, a variable may only be used to defines a whole json string or integer attribute value.
 
 The placeholder is written as such:
 ``#{key}`` 
@@ -238,10 +238,10 @@ Here is an example of a varibilized json payload :
        ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
 ```
-**Please note** you must add mappings **first**. 
+**Please note** that you must add mappings **first**. 
 
   * Adding a mapping after the first expected payload will trigger an error.
-  * Placeholders with no matching mappings will be left alone - and trigger a waining 
+  * Placeholders with no matching mappings will be left alone - and trigger a warning 
      and of course validation errors. 
 
 3. Use the templated version of methods when defining the message :
@@ -257,7 +257,7 @@ Here is an example of a varibilized json payload :
         sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json",receiver.mappings())
             .thenExpectHttpOkResponseCode();
 ```
-**Please note:** In this method we take the mappings for the receiver, so that mappings are consistent 
+**Please note:** In this method we use the mappings from the receiver, so that mappings are consistent 
 in both sent messages and expected messages.
 
 <a name="checking-that-a-request-is-received-from-the-sut" />
@@ -281,7 +281,7 @@ It may also be chained as many times as wanted.
                         "/publications",
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
 ```
-**Please note:** This method only defines a single expectation. However calls may be chained aqs needed.
+**Please note:** This method only defines a single expectation. However calls may be chained as needed.
 
 The path (first argument) is the path used in the subscription message (if the TestSuite subscribes to two
 kinds of events, the path must the one from the relevant subscription).
@@ -290,9 +290,10 @@ kinds of events, the path must the one from the relevant subscription).
 
 ### Ignoring uncontrolled parts of response messages
 
-Messages are expected exactly as specified. Missing, different AND unexpected attributes will trigger AssertionError.
-Some attributes are generated by the SUT and may not be predicted. To ignore such contents, you may use one of these two features
-defined by the json-unit library :
+Messages are expected exactly as specified. Missing, different AND unexpected attributes will trigger 
+an AssertionError.
+Some attributes are generated by the SUT and may not be predicted. To ignore such contents, you may use 
+one of these two features defined by the json-unit library :
 
 1. Ignoring an attribute value
 
@@ -310,7 +311,7 @@ Use the ``"${json-unit.ignore}"`` special value for this attribute :
 }
 ```
 
-2. Ignore an element alltogether
+2. Ignore an element altogether
 
 Use the ``"${json-unit.ignore-element}"``
 
@@ -350,8 +351,7 @@ Use the ``"${json-unit.ignore-element}"``
 
 ### Checking that a message has NOT been received
 
-Some tests will also want to check that a given mesage was NOT emitted. This is done using the
-
+Some tests will also want to check that a given message was NOT emitted. This is done using the
 ``withUnwantedRequests`` receiver method :
 
 ```java

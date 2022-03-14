@@ -128,8 +128,8 @@ For example, for the message of kind `MessageFromMyOtherPlugin` in namespace `cu
 
 ### Integration tests
 
-This toolkit project provides n integration test harness based on junit and MockServer. It is described [here](test-harness-tools/src/main/doc/index.md).
+This toolkit project provides an integration test harness based on junit and MockServer. It is described [here](test-harness-tools/src/main/doc/index.md).
 
 This harness allows you to write integration tests based on Junit to check that specific messages are emitted,
-or that some mesasges like ExecutionError messages are NOT emitted,
+or that some messages like ExecutionError messages are NOT emitted,
 as a reponse to one or more incoming messages on the event bus
