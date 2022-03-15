@@ -104,7 +104,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
         ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString()) //each call to this adds a key-value mapping to substitute in message templates
-                .withExpectedRequestTemplate( /* This means the expect message is defined as a message templates where place holder keys will be
+                .withExpectedRequestTemplate( /* This means the expected message is defined as a message templates where place holder keys will be
                                                * replaced with the values value defined above.*/
                         "/publications", //This path is the same as the path used in the relevant subscription test resource
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json") //This is the expected message resource name
@@ -213,7 +213,7 @@ Variable mappings are used to insert computed values from the junit test code in
 
 To use a variable mapping, you need to do as follows:
 1. Insert a place holder in the test resource.
-As of 2022/03/14, a variable may only be used to defines a whole json string or integer attribute value.
+As of 2022/03/14, a variable may only be used to define a whole json string or integer attribute value.
 
 The placeholder is written as such:
 ``#{key}`` 

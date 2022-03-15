@@ -132,4 +132,4 @@ This toolkit project provides an integration test harness based on junit and Moc
 
 This harness allows you to write integration tests based on Junit to check that specific messages are emitted,
 or that some messages like ExecutionError messages are NOT emitted,
-as a reponse to one or more incoming messages on the event bus
+as a response to one or more incoming messages on the event bus
