@@ -287,6 +287,52 @@ It may also be chained as many times as wanted.
 
 The path (first argument) is the path used in the subscription message (if the TestSuite subscribes to two
 kinds of events, the path must the one from the relevant subscription).
+This match may be done manually, but the toolkit gives tools to ensure it:
+
+* Define the subscription JSON path as a constant to avoid typos
+
+```java
+    public static final String EXECUTION_REPORT_BUS_SUBSCRIPTION = "/it/runsteps/executionReportBusSubscription.json";
+```
+
+* Use this in the test class constructor for registration
+
+```java
+    public StepExecutionIntegrationTest(){
+        super(MOCK_PORT, TestConfiguration.VALUES.getServiceBaseURL(EVENTBUS_BASE_KEY+URL_KEY_SUFFIX),TestConfiguration.VALUES.getServiceAuthToken(EVENTBUS_BASE_KEY+AUTH_TOKEN_KEY_SUFFIX),
+                EXECUTION_REPORT_BUS_SUBSCRIPTION, //This is the subscription, we're talking about, others may be added as needed
+                EXECUTION_ERROR_BUS_SUBSCRIPTION
+        );
+    }
+``
+
+* Use the receiverInbox variable (managed by the toolkit behind the scene) in your subscription JSON envelope 
+
+```json
+{
+  "apiVersion":"opentestfactory.org/v1alpha1",
+  "kind":  "Subscription",
+  "metadata": {
+    "name": "testclient.execution.report"
+  },
+  "spec": {
+    "selector": {
+      "matchKind": "ExecutionResult"
+    },
+    "subscriber":{
+      "endpoint":#{receiverInbox}
+    }
+  }
+}
+```
+* Use the ``subscriptionPath()`` function when registering expected messages :
+
+```java
+               .withExpectedRequestTemplate(
+                        subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
+                        useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
+                )
+```
 
 <a name="ignoring-uncontrolled-parts-of-response-messages" />
 
