@@ -143,7 +143,8 @@ The important parts are ``expected <here is your expected json>`` and ``but was 
 * If the actual part reads ``but was <>``, it means no reponse was detected. Either you got the expected path wrong
 (remember, it must match the path from the subscription envelope), or no response was received. In the latter case,
 you have to check the microservice logs to look for error traces or clues as to what prevented your expected event from 
-being fired.
+being fired. Another reason for this case would be that the delay is too short, and the expected
+message was sent after the test's check. In this case, you'll see the message when checking the logs.
 
 * If the actual part contains one or more json trees, events where received but did not match the expectations.
 From there, you need to compare them with the expected payload.
