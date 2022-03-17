@@ -282,7 +282,7 @@ Here is an example of a varibilized json payload:
   * For expected payloads:
 ```java
                .withExpectedRequestTemplate(
-                        "/publications",
+                        subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION),
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
 ```
 
@@ -322,6 +322,9 @@ It may also be chained as many times as wanted.
 
 The path (first argument) is the path used in the subscription message (if the TestSuite subscribes to two
 kinds of events, the path must the one from the relevant subscription).
+
+<a name="automatic-subscription-path" />
+**Automatic subscription path management**
 This match may be done manually, but the toolkit gives tools to ensure it:
 
 * Define the subscription JSON path as a constant to avoid typos
@@ -457,11 +460,13 @@ Some tests will also want to check that a given message was NOT emitted. This is
 
 ```java
                 ).withUnwantedRequests(
-                        requestMatcher(pathOfMock, "/eventbus/messages/unWantedKindMessage.json")
+                        requestMatcher(subscriptionPath(UNWANTED_KIND_SUBSCRIPTION), "/eventbus/messages/unWantedKindMessage.json")
                 )
 ```
 
 This method takes as many requestMatcher arguments as needed. It may also be chained several times.
+For each requestMatcher, the first argument is the path where the mock receives the kind of message 
+we want to check for. As for expected messages, you may use the subscriptionPath() function here, (see [Automatic subscription path management](#automatic-subscription-path) for the details of automatic subscription path management)
 
 <a name="sending-a-test-message" />
 
