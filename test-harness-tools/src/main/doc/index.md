@@ -372,6 +372,20 @@ This match may be done manually, but the toolkit gives tools to ensure it:
                 )
 ```
 
+Of course this mechanisme works if you have two or more different subscriptions in your test suite
+(for example checking for ``ExecutionResult`` and ``ExecutionError`` messages).
+
+In this case, you need to use the relevant subscription message path in your expectedMessage definitions.
+
+In an error test case, you'd specify :
+
+```java
+.withExpectedRequestTemplate(
+                        subscriptionPath(EXECUTION_ERROR_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
+                        useTestResource("/it/runsteps/expected/myExpectedExecutionErrorMessage.json")
+                )
+```
+
 <a name="ignoring-uncontrolled-parts-of-response-messages" />
 
 ### Ignoring uncontrolled parts of response messages
