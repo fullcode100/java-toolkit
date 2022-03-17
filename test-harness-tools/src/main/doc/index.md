@@ -362,6 +362,10 @@ This match may be done manually, but the toolkit gives tools to ensure it:
 * Use the ``subscriptionPath()`` function when registering expected messages :
 
 ```java
+               .withExpectedRequests(
+                        requestMatcher(subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION),"/eventbus/messages/basicMessage.json"),
+                        requestMatcher(subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION),"/eventbus/messages/messageWithMoreFields.json")
+                )
                .withExpectedRequestTemplate(
                         subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
