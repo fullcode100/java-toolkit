@@ -78,6 +78,8 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
      * NB: choose port numbers >=1025, as the 1-1024 range is reserved to standard protocols and requires admin privileges.
      */
     public static final int RECEIVER_PORT = 1091;
+    
+    public static final String EXECUTION_REPORT_BUS_SUBSCRIPTION = "/it/runsteps/executionReportBusSubscription.json";
 
     public StepExecutionIntegrationTest(){
         super(RECEIVER_PORT, 
@@ -93,7 +95,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
              /*
              * Here comes a (limited in most use cases) list of resource names pointing to json sbuscription messages to automatically subscribe the mock receiver to the SUT event bus.
              */
-                "/it/runsteps/executionReportBusSubscription.json"
+                EXECUTION_REPORT_BUS_SUBSCRIPTION
         );
     }
 
@@ -106,7 +108,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString()) //each call to this adds a key-value mapping to substitute in message templates
                 .withExpectedRequestTemplate( /* This means the expected message is defined as a message templates where place holder keys will be
                                                * replaced with the values value defined above.*/
-                        "/publications", //This path is the same as the path used in the relevant subscription test resource
+                        subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json") //This is the expected message resource name
                 );
 
