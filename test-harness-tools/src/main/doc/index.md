@@ -38,6 +38,7 @@ These test resources  are expected to be json payloads.
 * [Getting started](#getting-started)
 * [Anatomy of a failure](#anatomy-of-a-failure) 
 * [HOWTO](#howto)
+   * [Controlling the delay before test result is checked](#controlling-async-wait)
    * [Using variable mappings](#using-variable-mappings)
    * [Checking that a request is received from the SUT](#checking-that-a-request-is-received-from-the-sut)
    * [Ignoring uncontrolled parts of response messages](#ignoring-uncontrolled-parts-of-response-messages)
@@ -207,8 +208,36 @@ java.lang.AssertionError: Expected request payload not found: expected<{
 
 ## HOWTO
 
-<a name="using-variable-mappings" />
+<a name="controlling-async-wait" />
+### Controlling the delay before test result is checked
 
+As OTF microservices are asynchronous, integration tests work by sending inputs, 
+then waiting for a given time before checking what messages were received.
+This delay is specified through the ``delay`` parameter of the receiver's ``waitAndVerifyExpectedCall(Duration delay)``
+method.
+The test harness test suite base class defines the following base durations :
+
+* ``DELAY_BEFORE_ASYNC_REQUEST_VERIFY``: this is a short delay, suitable to test 
+responses from a single microservice directly to its input message.
+* ``DELAY_BEFORE_ASYNC_REQUEST_SEQUENCE_VERIFY``: this delay slightly longer, 
+a base to test interactions with several microservices, but no external operations.
+This applies whene there are no test execution environment operations, or the target environment is _inception_.
+* ``DELAY_FOR_SSH``: this is a longer delay base for tests with real execution environement operations through SSH.
+
+When writing your test, youy may find out that the tested process is infact longer than the time base.
+This is not a problem, because these three time bases are only there to define base test delays.
+If your test is longer, you may use the [java.time.Duration](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html)
+ API to specify any suitable delay. You may for example state that in your test case the
+delay should be twice the ``DELAY_FOR_SSH`` using ``Duration.multiplyBy(2)`` :
+
+```java
+   receiver.waitAndVerifyExpectedCall(DELAY_FOR_SSH.multiplyBy(2));
+```
+
+The idea behind time bases is to make global adjustments of integration tests durations easier,
+but if the test case requires it, any java.time.Duration instance may be used.
+
+<a name="using-variable-mappings" />
 ### Using variable mappings
 
 Variable mappings are used to insert computed values from the junit test code into test resources.
