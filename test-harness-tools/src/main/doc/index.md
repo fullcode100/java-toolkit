@@ -257,6 +257,7 @@ Here is an example of a varibilized json payload:
 ```
 
   * For sent messages:
+
 ```java
         sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json",receiver.mappings())
             .thenExpectHttpOkResponseCode();
@@ -270,6 +271,7 @@ in both sent messages and expected messages.
 This is done using the receiver using its withExpectedXXX methods as below:
 
 **Fixed content version**
+
 ```java
                 .withExpectedRequests(
                         requestMatcher("/messageIn","/eventbus/messages/basicMessage.json"),
@@ -280,6 +282,7 @@ This is done using the receiver using its withExpectedXXX methods as below:
 It may also be chained as many times as wanted.
 
 **Variabilized template version**
+
 ```java
         .withExpectedRequestTemplate(
                         "/publications",
