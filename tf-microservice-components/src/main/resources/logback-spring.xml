@@ -20,11 +20,14 @@
 
     <springProperty scope="context" name="bus.url" source="org.opentestfactory.bus.baseUrl"/>
     <springProperty scope="context" name="bus.token" source="org.opentestfactory.bus.authToken"/>
+    <!-- Application name needs to be setup in the service's application.properties -->
+    <springProperty scope="context" name="application.name" source="spring.application.name" />
 
     <appender name="workflow"
         class="org.opentestfactory.services.components.logger.WorkflowAppender">
         <busBaseUrl>${bus.url}</busBaseUrl>
         <busToken>${bus.token}</busToken>
+        <name>${application.name}</name>
     </appender>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
