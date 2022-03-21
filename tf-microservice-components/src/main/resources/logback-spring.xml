@@ -17,7 +17,9 @@
 
 -->
 <configuration>
-
+    
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    
     <springProperty scope="context" name="bus.url" source="org.opentestfactory.bus.baseUrl"/>
     <springProperty scope="context" name="bus.token" source="org.opentestfactory.bus.authToken"/>
     <!-- Application name needs to be setup in the service's application.properties -->
@@ -29,18 +31,9 @@
         <busToken>${bus.token}</busToken>
         <name>${application.name}</name>
     </appender>
-
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
-        </encoder>
-    </appender>
-   
     
-    <!-- LOG everything at TRACE level -->
-    <root level="warn">
+    <root level="info">
         <appender-ref ref="workflow" />
-        <appender-ref ref="console" />
     </root>
 
 </configuration>
