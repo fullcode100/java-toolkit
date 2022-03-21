@@ -225,7 +225,7 @@ a base to test interactions with several microservices, but no external operatio
 This applies whene there are no test execution environment operations, or the target environment is _inception_.
 * ``DELAY_FOR_SSH``: this is a longer delay base for tests with real execution environement operations through SSH.
 
-When writing your test, youy may find out that the tested process is infact longer than the time base.
+When writing your test, you may find out that the tested process is infact longer than the time base.
 This is not a problem, because these three time bases are only there to define base test delays.
 If your test is longer, you may use the [java.time.Duration](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html)
  API to specify any suitable delay. You may for example state that in your test case the
