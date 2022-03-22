@@ -18,4 +18,5 @@ include:
   - project: 'opentestfactory/ci-common/java-ci'
     ref: main
     file: 'gitlab-ci-java.yml'
-
+variables:
+  ARTIFACT_VISIBILITY: "public"
