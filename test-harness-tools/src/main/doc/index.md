@@ -338,7 +338,7 @@ This match may be done manually, but the toolkit gives tools to ensure it:
 ```java
     public StepExecutionIntegrationTest(){
         super(MOCK_PORT, TestConfiguration.VALUES.getServiceBaseURL(EVENTBUS_BASE_KEY+URL_KEY_SUFFIX),TestConfiguration.VALUES.getServiceAuthToken(EVENTBUS_BASE_KEY+AUTH_TOKEN_KEY_SUFFIX),
-                EXECUTION_REPORT_BUS_SUBSCRIPTION, //This is the subscription, we're talking about, others may be added as needed
+                EXECUTION_REPORT_BUS_SUBSCRIPTION, //This is the subscription we are talking about, others may be added as needed
                 EXECUTION_ERROR_BUS_SUBSCRIPTION
         );
     }
