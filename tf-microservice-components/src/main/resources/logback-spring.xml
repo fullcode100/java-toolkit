@@ -16,7 +16,7 @@
      limitations under the License.
 
 -->
-<configuration>
+<configuration debug="true">
     
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     
@@ -30,6 +30,10 @@
         <busBaseUrl>${bus.url}</busBaseUrl>
         <busToken>${bus.token}</busToken>
         <name>${application.name}</name>
+        <!-- 
+        Use this appender property if the logging queue size needs tuning
+        <queueSize>100</queueSize>
+        -->
     </appender>
     
     <root level="info">
