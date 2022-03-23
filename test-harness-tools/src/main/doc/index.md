@@ -17,7 +17,7 @@
 -->
 # OpenTestFactory Integration test harness
 
-Main principle: the harness is based on the Junit framework. It uses [MockServer](https://www.mock-server.com/mock_server/getting_started.html#request_properties_matchers)
+Main principle: the harness is based on the JUnit framework. It uses [MockServer](https://www.mock-server.com/mock_server/getting_started.html#request_properties_matchers)
 to setup a mock listening for callbacks from the system under test.
 As an outline, an integration test case consists in:
 
