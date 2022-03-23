@@ -122,7 +122,8 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
          /*
           * Here we ask the receiver to check received messages. 
-          * As these tests targets external processes with asynchrounous reponses, the receiver will wait before checking. The delay is defined as a parameter.
+          * As these tests target external processes with asynchrounous reponses, the receiver will wait before checking. The delay is defined as a parameter.
+          */
         receiver.waitAndVerifyExpectedCall(DELAY_BEFORE_ASYNC_REQUEST_SEQUENCE_VERIFY);
     }
 }
