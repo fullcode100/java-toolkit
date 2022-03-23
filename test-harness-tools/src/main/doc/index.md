@@ -210,6 +210,7 @@ java.lang.AssertionError: Expected request payload not found: expected<{
 ## HOWTO
 
 <a name="controlling-async-wait" />
+
 ### Controlling the delay before test result is checked
 
 As OTF microservices are asynchronous, integration tests work by sending inputs, 
@@ -239,6 +240,7 @@ The idea behind time bases is to make global adjustments of integration tests du
 but if the test case requires it, any java.time.Duration instance may be used.
 
 <a name="using-variable-mappings" />
+
 ### Using variable mappings
 
 Variable mappings are used to insert computed values from the JUnit test code into test resources.
@@ -300,7 +302,7 @@ in both sent messages and expected messages.
 ### Checking that a request is received from the SUT
 This is done using the receiver using its withExpectedXXX methods as below:
 
-**Fixed content version**
+### Fixed content version
 
 ```java
                 .withExpectedRequests(
@@ -311,7 +313,7 @@ This is done using the receiver using its withExpectedXXX methods as below:
 **Please note:** This method is varags, so you may include as many requetMatcher calls as needed.
 It may also be chained as many times as wanted.
 
-**Variabilized template version**
+### Variabilized template version
 
 ```java
         .withExpectedRequestTemplate(
@@ -324,7 +326,9 @@ The path (first argument) is the path used in the subscription message (if the T
 kinds of events, the path must the one from the relevant subscription).
 
 <a name="automatic-subscription-path" />
-**Automatic subscription path management**
+
+### Automatic subscription path management
+
 This match may be done manually, but the toolkit gives tools to ensure it:
 
 * Define the subscription JSON path as a constant to avoid typos
