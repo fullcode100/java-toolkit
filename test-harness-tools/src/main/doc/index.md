@@ -241,7 +241,7 @@ but if the test case requires it, any java.time.Duration instance may be used.
 <a name="using-variable-mappings" />
 ### Using variable mappings
 
-Variable mappings are used to insert computed values from the junit test code into test resources.
+Variable mappings are used to insert computed values from the JUnit test code into test resources.
 
 To use a variable mapping, you need to do as follows:
 1. Insert a place holder in the test resource.
