@@ -346,7 +346,7 @@ This match may be done manually, but the toolkit gives tools to ensure it:
                 EXECUTION_ERROR_BUS_SUBSCRIPTION
         );
     }
-``
+```
 
 * Use the receiverInbox variable (managed by the toolkit behind the scene) in your subscription JSON envelope 
 
