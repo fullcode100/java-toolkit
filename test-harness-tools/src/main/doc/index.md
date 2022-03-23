@@ -381,7 +381,7 @@ Of course this mechanisme works if you have two or more different subscriptions 
 
 In this case, you need to use the relevant subscription message path in your expectedMessage definitions.
 
-In an error test case, you'd specify :
+In an error test case, you would specify:
 
 ```java
 .withExpectedRequestTemplate(
