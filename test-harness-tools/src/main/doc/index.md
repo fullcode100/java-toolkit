@@ -107,7 +107,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
         ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString()) //each call to this adds a key-value mapping to substitute in message templates
-                .withExpectedRequestTemplate( /* This means the expected message is defined as a message templates where place holder keys will be
+                .withExpectedRequestTemplate( /* This means the expected message is defined as a message template where place holder keys will be
                                                * replaced with the values value defined above.*/
                         subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json") //This is the expected message resource name
@@ -129,7 +129,7 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 
 ```
 
-When using the ExpectedOutputReceiver, remember that it is an immutable object, so you must chain all calls as chown in the sample above. 
+When using the ExpectedOutputReceiver, remember that it is an immutable object, so you must chain all calls as shown in the sample above. 
 
 <a name="anatomy-of-a-failure" />
 
@@ -146,7 +146,7 @@ you have to check the microservice logs to look for error traces or clues as to 
 being fired. Another reason for this case would be that the delay is too short, and the expected
 message was sent after the test's check. In this case, you'll see the message when checking the logs.
 
-* If the actual part contains one or more json trees, events where received but did not match the expectations.
+* If the actual part contains one or more json trees, events were received but did not match the expectations.
 From there, you need to compare them with the expected payload.
 
 ```log
@@ -222,10 +222,10 @@ The test harness test suite base class defines the following base durations:
 responses from a single microservice directly to its input message.
 * ``DELAY_BEFORE_ASYNC_REQUEST_SEQUENCE_VERIFY``: this delay slightly longer, 
 a base to test interactions with several microservices, but no external operations.
-This applies whene there are no test execution environment operations, or the target environment is _inception_.
-* ``DELAY_FOR_SSH``: this is a longer delay base for tests with real execution environement operations through SSH.
+This applies when there are no test execution environment operations, or the target environment is _inception_.
+* ``DELAY_FOR_SSH``: this is a longer delay base for tests with real execution environment operations through SSH.
 
-When writing your test, you may find out that the tested process is infact longer than the time base.
+When writing your test, you may find out that the tested process is in  fact longer than the time base.
 This is not a problem, because these three time bases are only there to define base test delays.
 If your test is longer, you may use the [java.time.Duration](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html)
  API to specify any suitable delay. You may for example state that in your test case the
@@ -376,7 +376,7 @@ This match may be done manually, but the toolkit gives tools to ensure it:
                 )
 ```
 
-Of course this mechanisme works if you have two or more different subscriptions in your test suite
+Of course this mechanism works if you have two or more different subscriptions in your test suite
 (for example checking for ``ExecutionResult`` and ``ExecutionError`` messages).
 
 In this case, you need to use the relevant subscription message path in your expectedMessage definitions.
