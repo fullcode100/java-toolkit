@@ -273,7 +273,7 @@ To use a variable mapping, you need to do as follows:
 
    **Please note** that the place holder has no quotes. It must replace the **whole** attribute value.
    
-   * To refine the whole value of a sintrg or integer list element
+   * To define the whole value of a string or integer list element
 
    Here is an example of a json list with variabilized content (some fields have been ommitted):
 
