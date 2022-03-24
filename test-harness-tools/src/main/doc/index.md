@@ -247,27 +247,60 @@ but if the test case requires it, any java.time.Duration instance may be used.
 Variable mappings are used to insert computed values from the JUnit test code into test resources.
 
 To use a variable mapping, you need to do as follows:
+
 1. Insert a place holder in the test resource.
-As of 2022/03/14, a variable may only be used to define a whole json string or integer attribute value.
 
-The placeholder is written using the syntax:
-``#{key}`` 
+   As of 2022/03/14, a variable may only be used in the following cases :
 
-Here is an example of a varibilized json payload:
+   * To define a whole json string or integer attribute value,
+   
+   The placeholder is written using the syntax: ``#{key}`` 
+   
+   Here is an example of a json payload where a field value is varibilized: 
+     
+   ```json
+   {
+      "apiVersion": "opentestfactory.org/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+         "workflow_id": #{workflow_uuid}
+      },
+      "jobs": {
+         
+      }
+   }
+   ```
 
-```json
-{
-  "apiVersion": "opentestfactory.org/v1alpha1",
-  "kind": "Workflow",
-  "metadata": {
-    "workflow_id": #{workflow_uuid}
-  },
-  "jobs": {
-  
-  }
-}
-```
-**Please note** that the place holder has no quotes. It must replace the **whole** attribute value.
+   **Please note** that the place holder has no quotes. It must replace the **whole** attribute value.
+   
+   * To refine the whole value of a sintrg or integer list element
+
+   Here is an example of a json list with variabilized content (some fields have been ommitted):
+
+   ```json
+   {
+      "apiVersion": "opentestfactory.org/v1alpha1",
+      "kind": "ReportInterpreterInput",
+      "with": {
+         "testTechnology": "wrongTech/execute@v1",
+         "testDefinition": "agilitest-project/src/main/ats/api/API_REST.ats",
+         "attachments": [#{_ti_agilitestInterpreter_input_reports_69f641c8-ecb6-4e1a-ba83-44daff1f91a6_2_success-surefire-report.xml},#{_ti_agilitestInterpreter_input_reports_69f641c8-ecb6-4e1a-ba83-44daff1f91a6_3_success-surefire-report.xml}]
+      }
+   }
+   ```
+
+   For these variabilized list elements to be recognized and properly replaced, the list must be written on a single line. Only individual elements may be defined as variables, but mixing hardcoded elements with variables like in the sample below is supported.
+
+   ```json
+   {
+      "apiVersion": "example.com/v1alpha1",
+      "kind": "SampleMessage",
+      "with": {
+         "list": ["element1",#{variable},"element3"]
+      }
+   }
+   ```
+
 
 2. Add the key/value mapping to the registered mappings in your test
 
