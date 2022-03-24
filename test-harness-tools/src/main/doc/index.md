@@ -304,31 +304,35 @@ To use a variable mapping, you need to do as follows:
 
 2. Add the key/value mapping to the registered mappings in your test
 
-```java
+   ```java
        ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
-```
-**Please note** that you must add mappings **first**. 
+   ```
 
-  * Adding a mapping after the first expected payload will trigger an error.
-  * Placeholders with no matching mappings will be left alone - and trigger a warning 
+   **Please note** that you must add mappings **first**. 
+
+   * Adding a mapping after the first expected payload will trigger an error.
+   * Placeholders with no matching mappings will be left alone - and trigger a warning 
      and of course validation errors. 
 
 3. Use the templated version of methods when defining the message:
-  * For expected payloads:
-```java
+
+   * For expected payloads:
+
+   ```java
                .withExpectedRequestTemplate(
                         subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION),
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
-```
+   ```
 
-  * For sent messages:
+   * For sent messages:
 
-```java
+   ```java
         sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json",receiver.mappings())
             .thenExpectHttpOkResponseCode();
-```
-**Please note:** In this method we use the mappings from the receiver, so that mappings are consistent 
+   ```
+
+   **Please note:** In this method we use the mappings from the receiver, so that mappings are consistent 
 in both sent messages and expected messages.
 
 <a name="checking-that-a-request-is-received-from-the-sut" />
