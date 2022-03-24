@@ -289,7 +289,8 @@ To use a variable mapping, you need to do as follows:
    }
    ```
 
-   For these variabilized list elements to be recognized and properly replaced, the list must be written on a single line. Only individual elements may be defined as variables, but mixing hardcoded elements with variables like in the sample below is supported.
+   For these variabilized list elements to be recognized and properly replaced, the list must be written on a single line. 
+   Only individual elements may be defined as variables, but mixing hardcoded elements with variables like in the sample below is supported.
 
    ```json
    {
