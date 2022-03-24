@@ -250,7 +250,7 @@ To use a variable mapping, you need to do as follows:
 
 1. Insert a place holder in the test resource.
 
-   As of 2022/03/14, a variable may only be used in the following cases :
+   As of 2022/03/14, a variable may only be used in the following cases:
 
    * To define a whole json string or integer attribute value,
    
