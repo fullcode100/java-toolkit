@@ -256,7 +256,7 @@ To use a variable mapping, you need to do as follows:
    
    The placeholder is written using the syntax: ``#{key}`` 
    
-   Here is an example of a json payload where a field value is variabilize: 
+   Here is an example of a json payload where a field value is variabilized: 
      
    ```json
    {
