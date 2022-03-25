@@ -248,7 +248,7 @@ Variable mappings are used to insert computed values from the JUnit test code in
 
 To use a variable mapping, you need to do as follows:
 
-1. Insert a place holder in the test resource.
+1. Insert a placeholder in the test resource.
 
    As of 2022/03/14, a variable may only be used in the following cases:
 
@@ -256,7 +256,7 @@ To use a variable mapping, you need to do as follows:
    
    The placeholder is written using the syntax: ``#{key}`` 
    
-   Here is an example of a json payload where a field value is varibilized: 
+   Here is an example of a json payload where a field value is variabilize: 
      
    ```json
    {
