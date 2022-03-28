@@ -494,6 +494,39 @@ Use the ``"${json-unit.ignore-element}"``
 }
 ```
 
+3. Ignore list element order
+
+Some lists used in OTF messages (for example attachments) are, in fact, used as sets.
+The system doesn't use or control their element order. This may lead to false positive
+failed tests.
+
+To check these envelopes, use the receiver's `withIgnoreArrayElementOrder()` method:
+
+```java
+@Test
+  public void shouldReturnAnAllureCollectorInput()
+      throws IOException, URISyntaxException, InterruptedException {
+    ExpectedOutputReceiver reportingReceiver =
+        getExpectedOutputReceiver()
+            .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
+            .withVariableMapping(
+                "name", "org.opentestfactory.plugins.result.aggregator.OTFResultAggregatorService")
+            .withExpectedRequestTemplate(
+                subscriptionPath(NOTIFY_INTEREST_SUBSCRIPTION_JSON),
+                useTestResource("/ti/common/workerStart.json"))
+            .withExpectedRequestTemplate(
+                subscriptionPath(ALLURE_INPUT_SUBSCRIPTION_JSON),
+                useTestResource("/ti/resultAggregator/output/allureCollectorInput.json"))
+            .withExpectedRequestTemplate(
+                subscriptionPath(NOTIFY_INTEREST_SUBSCRIPTION_JSON),
+                useTestResource("/ti/common/workerTeardown.json"))
+            .withIgnoreArrayElementOrder();
+
+```
+
+**Please note:** this applies to ALL expected messages. If the case needs to check a message where
+order does matter, it may need to be tested alone in another test case dedicated to this item order check.
+
 <a name="checking-that-a-message-has-not-been-received" />
 
 ### Checking that a message has NOT been received
