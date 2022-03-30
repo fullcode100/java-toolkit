@@ -36,6 +36,7 @@ These test resources  are expected to be json payloads.
 <!-- (As there is no automatic TOC in markdown, manually maintained:'( - this is a comment by the way !) -->
 
 * [Getting started](#getting-started)
+* [Setup to Execute integration tests](#setup-test-execution)
 * [Anatomy of a failure](#anatomy-of-a-failure) 
 * [HOWTO](#howto)
    * [Controlling the delay before test result is checked](#controlling-async-wait)
@@ -131,6 +132,94 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 ```
 
 When using the ExpectedOutputReceiver, remember that it is an immutable object, so you must chain all calls as shown in the sample above. 
+
+<a name="setup-test-execution" />
+
+## Setup to Execute integration tests
+
+These integration tests are junit tests. At the end of this section is a typical pom file for these integration tests.
+
+To run integration tests, you need to provide connection information for your target orchestrator instance.
+This is done through a java system property pointing to a properties file describing connection parameters.
+The name of this java system property is `org.opentestfactory.test.cfg`, and here is a typical content :
+
+```properties
+eventbus.base.url=http://127.0.0.1:8765
+receptionist.base.url=http://127.0.0.1:8865
+# Tokens might be useless when testing from developement working copies, 
+# but they are needed if you are testing an image or a remote UAT instance
+#eventbus.base.auth-token=<paste your token here>
+#receptionist.base.auth-token=<paste your token here>
+# The mock hostname allows the SUT to send back events 
+# to the right machine where the junit integration test code is running
+mock.hostname=127.0.0.1
+```
+
+If the SUT reponds quicker or slower than expected through integration test wait times,
+wait times can be adjusted by adding the optional `sut.duration.factor.percent` property
+the the configuration file.
+The factor is expressed in percent of the base wait time. For example if the SUT is 30% slower,
+add `sut.duration.factor.percent=130` to your configuration file.
+
+**Sample pom.xml file**
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.opentestfactory</groupId>
+        <artifactId>tf.it.parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>tf-integration-tests</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <name>Open Test Factory core integration test.</name>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.opentestfactory</groupId>
+            <artifactId>test-harness-tools</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-property</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
 
 <a name="anatomy-of-a-failure" />
 
