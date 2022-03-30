@@ -139,17 +139,27 @@ When using the ExpectedOutputReceiver, remember that it is an immutable object, 
 
 These integration tests are junit tests. At the end of this section is a typical pom file for these integration tests.
 
-To run integration tests, you need to provide connection information for your target orchestrator instance.
-This is done through a java system property pointing to a properties file describing connection parameters.
-The name of this java system property is `org.opentestfactory.test.cfg`, and here is a typical content :
+To run integration tests, you need to provide connection information for 
+your target orchestrator instance. This is done through a java system property 
+pointing to a properties file describing connection parameters.
+The name of this java system property is `org.opentestfactory.test.cfg`.
+
+The `org.opentestfactory.test.cfg` property may be defined by adding 
+`-Dorg.opentestfactory.test.cfg=/path/to/file` to your maven command line 
+or run configuration when running from an ide.
+Another way of doing this which may be useful to run these tests 
+from an OTF PEaC would be to define the _JAVA_OPTIONS environment variable 
+with the `-Dorg.opentestfactory.test.cfg=/path/to/file` value.
+
+The properties defined in the configuration file are the following:
 
 ```properties
 eventbus.base.url=http://127.0.0.1:8765
 receptionist.base.url=http://127.0.0.1:8865
 # Tokens might be useless when testing from developement working copies, 
 # but they are needed if you are testing an image or a remote UAT instance
-#eventbus.base.auth-token=<paste your token here>
-#receptionist.base.auth-token=<paste your token here>
+eventbus.base.auth-token=<paste your token here>
+receptionist.base.auth-token=<paste your token here>
 # The mock hostname allows the SUT to send back events 
 # to the right machine where the junit integration test code is running
 mock.hostname=127.0.0.1
@@ -158,8 +168,12 @@ mock.hostname=127.0.0.1
 If the SUT reponds quicker or slower than expected through integration test wait times,
 wait times can be adjusted by adding the optional `sut.duration.factor.percent` property
 the the configuration file.
-The factor is expressed in percent of the base wait time. For example if the SUT is 30% slower,
-add `sut.duration.factor.percent=130` to your configuration file.
+The factor is expressed in percent of the base wait time. For example:
+
+*  if the SUT is 30% slower,
+   add `sut.duration.factor.percent=130` to your configuration file.
+*  If it runs twice as quick,
+   add `sut.duration.factor.percent=50` to your configuration file.
 
 **Sample pom.xml file**
 
