@@ -165,7 +165,7 @@ receptionist.base.auth-token=<paste your token here>
 mock.hostname=127.0.0.1
 ```
 
-If the SUT reponds quicker or slower than expected through integration test wait times,
+If the SUT responds more quickly and more slowly than the durations defined by the integration test wait times,
 wait times can be adjusted by adding the optional `sut.duration.factor.percent` property
 in the configuration file.
 The factor is expressed in percent of the base wait time. For example:
