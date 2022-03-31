@@ -145,7 +145,7 @@ pointing to a properties file describing connection parameters.
 The name of this java system property is `org.opentestfactory.test.cfg`.
 
 The `org.opentestfactory.test.cfg` property may be defined by adding 
-`-Dorg.opentestfactory.test.cfg=/path/to/file` to your maven command line 
+`-Dorg.opentestfactory.test.cfg=/path/to/file.properties` to your maven command line 
 or run configuration when running from an ide.
 Another way of doing this which may be useful to run these tests 
 from an OTF PEaC would be to define the _JAVA_OPTIONS environment variable 
