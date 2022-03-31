@@ -167,7 +167,7 @@ mock.hostname=127.0.0.1
 
 If the SUT reponds quicker or slower than expected through integration test wait times,
 wait times can be adjusted by adding the optional `sut.duration.factor.percent` property
-the the configuration file.
+in the configuration file.
 The factor is expressed in percent of the base wait time. For example:
 
 *  if the SUT is 30% slower,
