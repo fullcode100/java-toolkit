@@ -36,6 +36,7 @@ These test resources  are expected to be json payloads.
 <!-- (As there is no automatic TOC in markdown, manually maintained:'( - this is a comment by the way !) -->
 
 * [Getting started](#getting-started)
+* [Setup to Execute integration tests](#setup-test-execution)
 * [Anatomy of a failure](#anatomy-of-a-failure) 
 * [HOWTO](#howto)
    * [Controlling the delay before test result is checked](#controlling-async-wait)
@@ -131,6 +132,108 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
 ```
 
 When using the ExpectedOutputReceiver, remember that it is an immutable object, so you must chain all calls as shown in the sample above. 
+
+<a name="setup-test-execution" />
+
+## Setup to Execute integration tests
+
+These integration tests are junit tests. At the end of this section is a typical pom file for these integration tests.
+
+To run integration tests, you need to provide connection information for 
+your target orchestrator instance. This is done through a java system property 
+pointing to a properties file describing connection parameters.
+The name of this java system property is `org.opentestfactory.test.cfg`.
+
+The `org.opentestfactory.test.cfg` property may be defined by adding 
+`-Dorg.opentestfactory.test.cfg=/path/to/file.properties` to your maven command line 
+or run configuration when running from an ide.
+Another way of doing this which may be useful to run these tests 
+from an OTF PEaC would be to define the _JAVA_OPTIONS environment variable 
+with the `-Dorg.opentestfactory.test.cfg=/path/to/file.properties` value.
+
+The properties defined in the configuration file are the following:
+
+```properties
+eventbus.base.url=http://127.0.0.1:8765
+receptionist.base.url=http://127.0.0.1:8865
+# Tokens might be useless when testing from developement working copies, 
+# but they are needed if you are testing an image or a remote UAT instance
+eventbus.base.auth-token=<paste your token here>
+receptionist.base.auth-token=<paste your token here>
+# The mock hostname allows the SUT to send back events 
+# to the right machine where the junit integration test code is running
+mock.hostname=127.0.0.1
+```
+
+If the SUT responds more quickly and more slowly than the durations defined by the integration test wait times,
+wait times can be adjusted by adding the optional `sut.duration.factor.percent` property
+in the configuration file.
+The factor is expressed in percent of the base wait time. For example:
+
+*  if the SUT is 30% slower,
+   add `sut.duration.factor.percent=130` to your configuration file.
+*  If it runs twice as quick,
+   add `sut.duration.factor.percent=50` to your configuration file.
+
+**Sample pom.xml file**
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.opentestfactory</groupId>
+        <artifactId>tf.it.parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>tf-integration-tests</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <name>Open Test Factory core integration test.</name>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.opentestfactory</groupId>
+            <artifactId>test-harness-tools</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-property</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
 
 <a name="anatomy-of-a-failure" />
 
@@ -247,55 +350,93 @@ but if the test case requires it, any java.time.Duration instance may be used.
 Variable mappings are used to insert computed values from the JUnit test code into test resources.
 
 To use a variable mapping, you need to do as follows:
-1. Insert a place holder in the test resource.
-As of 2022/03/14, a variable may only be used to define a whole json string or integer attribute value.
 
-The placeholder is written using the syntax:
-``#{key}`` 
+1. Insert a placeholder in the test resource.
 
-Here is an example of a varibilized json payload:
+   As of 2022/03/14, a variable may only be used in the following cases:
 
-```json
-{
-  "apiVersion": "opentestfactory.org/v1alpha1",
-  "kind": "Workflow",
-  "metadata": {
-    "workflow_id": #{workflow_uuid}
-  },
-  "jobs": {
-  
-  }
-}
-```
-**Please note** that the place holder has no quotes. It must replace the **whole** attribute value.
+   * To define a whole json string or integer attribute value,
+   
+   The placeholder is written using the syntax: ``#{key}`` 
+   
+   Here is an example of a json payload where a field value is variabilized: 
+     
+   ```json
+   {
+      "apiVersion": "opentestfactory.org/v1alpha1",
+      "kind": "Workflow",
+      "metadata": {
+         "workflow_id": #{workflow_uuid}
+      },
+      "jobs": {
+         
+      }
+   }
+   ```
+
+   **Please note** that the place holder has no quotes. It must replace the **whole** attribute value.
+   
+   * To define the whole value of a string or integer list element
+
+   Here is an example of a json list with variabilized content (some fields have been ommitted):
+
+   ```json
+   {
+      "apiVersion": "opentestfactory.org/v1alpha1",
+      "kind": "ReportInterpreterInput",
+      "with": {
+         "testTechnology": "wrongTech/execute@v1",
+         "testDefinition": "agilitest-project/src/main/ats/api/API_REST.ats",
+         "attachments": [#{_ti_agilitestInterpreter_input_reports_69f641c8-ecb6-4e1a-ba83-44daff1f91a6_2_success-surefire-report.xml},#{_ti_agilitestInterpreter_input_reports_69f641c8-ecb6-4e1a-ba83-44daff1f91a6_3_success-surefire-report.xml}]
+      }
+   }
+   ```
+
+   For these variabilized list elements to be recognized and properly replaced, the list must be written on a single line. 
+   Only individual elements may be defined as variables, but mixing hardcoded elements with variables like in the sample below is supported.
+
+   ```json
+   {
+      "apiVersion": "example.com/v1alpha1",
+      "kind": "SampleMessage",
+      "with": {
+         "list": ["element1",#{variable},"element3"]
+      }
+   }
+   ```
+
 
 2. Add the key/value mapping to the registered mappings in your test
 
-```java
+   ```java
        ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
-```
-**Please note** that you must add mappings **first**. 
+   ```
 
-  * Adding a mapping after the first expected payload will trigger an error.
-  * Placeholders with no matching mappings will be left alone - and trigger a warning 
+   **Please note** that you must add mappings **first**. 
+
+   * Adding a mapping after the first expected payload will trigger an error.
+   * Placeholders with no matching mappings will be left alone - and trigger a warning 
      and of course validation errors. 
 
 3. Use the templated version of methods when defining the message:
-  * For expected payloads:
-```java
+
+   * For expected payloads:
+
+   ```java
                .withExpectedRequestTemplate(
                         subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION),
                         useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")
-```
+   ```
 
-  * For sent messages:
+   * For sent messages:
 
-```java
+   ```java
         sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json",receiver.mappings())
             .thenExpectHttpOkResponseCode();
-```
-**Please note:** In this method we use the mappings from the receiver, so that mappings are consistent 
+   ```
+
+   **Please note:** In this method we use the mappings from the receiver, so that mappings are consistent 
 in both sent messages and expected messages.
 
 <a name="checking-that-a-request-is-received-from-the-sut" />
@@ -455,6 +596,39 @@ Use the ``"${json-unit.ignore-element}"``
   "job": "${json-unit.ignore-element}"
 }
 ```
+
+3. Ignore list element order
+
+Some lists used in OTF messages (for example attachments) are, in fact, used as sets.
+The system doesn't use or control their element order. This may lead to false positive
+failed tests.
+
+To check these envelopes, use the receiver's `withIgnoreArrayElementOrder()` method:
+
+```java
+@Test
+  public void shouldReturnAnAllureCollectorInput()
+      throws IOException, URISyntaxException, InterruptedException {
+    ExpectedOutputReceiver reportingReceiver =
+        getExpectedOutputReceiver()
+            .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
+            .withVariableMapping(
+                "name", "org.opentestfactory.plugins.result.aggregator.OTFResultAggregatorService")
+            .withExpectedRequestTemplate(
+                subscriptionPath(NOTIFY_INTEREST_SUBSCRIPTION_JSON),
+                useTestResource("/ti/common/workerStart.json"))
+            .withExpectedRequestTemplate(
+                subscriptionPath(ALLURE_INPUT_SUBSCRIPTION_JSON),
+                useTestResource("/ti/resultAggregator/output/allureCollectorInput.json"))
+            .withExpectedRequestTemplate(
+                subscriptionPath(NOTIFY_INTEREST_SUBSCRIPTION_JSON),
+                useTestResource("/ti/common/workerTeardown.json"))
+            .withIgnoreArrayElementOrder();
+
+```
+
+**Please note:** this applies to ALL expected messages. If the case needs to check a message where
+order does matter, it may need to be tested alone in another test case dedicated to this item order check.
 
 <a name="checking-that-a-message-has-not-been-received" />
 
