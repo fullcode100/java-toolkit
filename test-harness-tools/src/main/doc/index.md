@@ -149,7 +149,7 @@ The `org.opentestfactory.test.cfg` property may be defined by adding
 or run configuration when running from an ide.
 Another way of doing this which may be useful to run these tests 
 from an OTF PEaC would be to define the _JAVA_OPTIONS environment variable 
-with the `-Dorg.opentestfactory.test.cfg=/path/to/file` value.
+with the `-Dorg.opentestfactory.test.cfg=/path/to/file.properties` value.
 
 The properties defined in the configuration file are the following:
 
