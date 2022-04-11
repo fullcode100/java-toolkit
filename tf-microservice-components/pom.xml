@@ -194,6 +194,7 @@
             <groupId>org.opentestfactory</groupId>
             <artifactId>test-harness-tools</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
             
     </dependencies>
