@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright (c) 2020 - 2022 Henix, henix.fr
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<robot generator="Robot 3.1.2 (Python 3.7.3 on linux)" generated="20210603 14:31:04.676" rpa="false">
+<suite id="s1" name="robotTFParamCheck" source="/media/kung/UNIX_DATA/gitprojects/robotTFParamCheck">
+<suite id="s1-s1" name="Robot Community" source="/media/kung/UNIX_DATA/gitprojects/robotTFParamCheck/robot_community.robot">
+<test id="s1-s1-t1" name="Check TC CUF">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>TC_CUF_testcase</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.697" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.697" endtime="20210603 14:31:04.697"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</do>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.697" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.697" endtime="20210603 14:31:04.697"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.697" endtime="20210603 14:31:04.697"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>testcaseValue</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.698" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.698" level="FAIL">testcaseValue != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.698" endtime="20210603 14:31:04.698"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.696" endtime="20210603 14:31:04.698" critical="yes">testcaseValue != None</status>
+</test>
+<test id="s1-s1-t2" name="Check DS_NAME">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>DSNAME</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.699" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.698" endtime="20210603 14:31:04.699"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.699" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.699" endtime="20210603 14:31:04.699"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.698" endtime="20210603 14:31:04.699"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>dataset1</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.699" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.699" level="FAIL">dataset1 != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.699" endtime="20210603 14:31:04.699"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.698" endtime="20210603 14:31:04.699" critical="yes">dataset1 != None</status>
+</test>
+<test id="s1-s1-t3" name="Check DS_FIRST_PARAM">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>DS_FIRST_PARAM</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.700" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.700" endtime="20210603 14:31:04.700"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.701" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.700" endtime="20210603 14:31:04.701"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.700" endtime="20210603 14:31:04.701"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>value1</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.701" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.701" level="FAIL">value1 != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.701" endtime="20210603 14:31:04.701"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.700" endtime="20210603 14:31:04.701" critical="yes">value1 != None</status>
+</test>
+<test id="s1-s1-t4" name="Check Default Param">
+<kw name="Load Squash Default Test Parameter" library="param_keywords">
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>UnavailableVar</arg>
+<arg>DefaultTestParam</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.702" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.702" endtime="20210603 14:31:04.702"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.702" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.702" endtime="20210603 14:31:04.702"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.701" endtime="20210603 14:31:04.702"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>DefaultTestParam</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<status status="PASS" starttime="20210603 14:31:04.702" endtime="20210603 14:31:04.702"></status>
+</kw>
+<kw name="Load Squash Default All Parameter" library="param_keywords">
+<kw name="Get Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter if defined, else the global parameter if defined, None otherwise</doc>
+<arguments>
+<arg>UnavailableVar</arg>
+<arg>DefaultAllParam</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.703" level="INFO">${PARAM} = DefaultAllParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.703" endtime="20210603 14:31:04.703"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.703" level="INFO">${PARAM} = DefaultAllParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.703" endtime="20210603 14:31:04.703"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.702" endtime="20210603 14:31:04.703"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>DefaultAllParam</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<status status="PASS" starttime="20210603 14:31:04.703" endtime="20210603 14:31:04.703"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.701" endtime="20210603 14:31:04.703" critical="yes"></status>
+</test>
+<test id="s1-s1-t5" name="Check Default Param Failure">
+<kw name="Load Squash Default Test Parameter" library="param_keywords">
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>UnavailableVar</arg>
+<arg>DefaultTestParam</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.704" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.704" endtime="20210603 14:31:04.704"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.704" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.704" endtime="20210603 14:31:04.704"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.704" endtime="20210603 14:31:04.704"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>Failure</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.705" level="FAIL">Failure != DefaultTestParam</msg>
+<status status="FAIL" starttime="20210603 14:31:04.705" endtime="20210603 14:31:04.705"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.703" endtime="20210603 14:31:04.705" critical="yes">Failure != DefaultTestParam</status>
+</test>
+<doc>Simple test for TFParamService in a Community environment</doc>
+<status status="FAIL" starttime="20210603 14:31:04.691" endtime="20210603 14:31:04.705"></status>
+</suite>
+<suite id="s1-s2" name="Robot Premium" source="/media/kung/UNIX_DATA/gitprojects/robotTFParamCheck/robot_premium.robot">
+<test id="s1-s2-t1" name="Check CPG_CUF">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>CPG_CUF_campaign</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.708" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.708" endtime="20210603 14:31:04.708"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.709" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.708" endtime="20210603 14:31:04.709"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.708" endtime="20210603 14:31:04.709"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>campaignValue</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.709" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.709" level="FAIL">campaignValue != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.709" endtime="20210603 14:31:04.709"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.708" endtime="20210603 14:31:04.709" critical="yes">campaignValue != None</status>
+</test>
+<test id="s1-s2-t2" name="Check TS_CUF">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>TS_CUF_testsuite</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.710" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.710" endtime="20210603 14:31:04.710"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.710" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.710" endtime="20210603 14:31:04.710"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.709" endtime="20210603 14:31:04.710"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>testsuiteValue</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.710" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.710" level="FAIL">testsuiteValue != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.710" endtime="20210603 14:31:04.711"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.709" endtime="20210603 14:31:04.711" critical="yes">testsuiteValue != None</status>
+</test>
+<test id="s1-s2-t3" name="Check TC_CUF">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>TC_CUF_testcase</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.711" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.711" endtime="20210603 14:31:04.711"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.712" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.711" endtime="20210603 14:31:04.712"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.711" endtime="20210603 14:31:04.712"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>testcaseValue</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.712" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.712" level="FAIL">testcaseValue != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.712" endtime="20210603 14:31:04.712"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.711" endtime="20210603 14:31:04.712" critical="yes">testcaseValue != None</status>
+</test>
+<test id="s1-s2-t4" name="Check IT_CUF">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>IT_CUF_iteration</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.713" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.713" endtime="20210603 14:31:04.713"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.713" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.713" endtime="20210603 14:31:04.713"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.712" endtime="20210603 14:31:04.713"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>iterationValue</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.713" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.713" level="FAIL">iterationValue != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.713" endtime="20210603 14:31:04.713"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.712" endtime="20210603 14:31:04.714" critical="yes">iterationValue != None</status>
+</test>
+<test id="s1-s2-t5" name="Check DS_NAME">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>DSNAME</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.714" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.714" endtime="20210603 14:31:04.714"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.715" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.715" endtime="20210603 14:31:04.715"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.714" endtime="20210603 14:31:04.715"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>dataset1</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.715" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.715" level="FAIL">dataset1 != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.715" endtime="20210603 14:31:04.715"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.714" endtime="20210603 14:31:04.715" critical="yes">dataset1 != None</status>
+</test>
+<test id="s1-s2-t6" name="Check DS_FIRST_PARAM">
+<kw name="Load Squash Test Parameter" library="param_keywords">
+<arguments>
+<arg>DS_FIRST_PARAM</arg>
+</arguments>
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>${PARAM_NAME}</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.716" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.716" endtime="20210603 14:31:04.716"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.716" level="INFO">${PARAM} = None</msg>
+<status status="PASS" starttime="20210603 14:31:04.716" endtime="20210603 14:31:04.716"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.716" endtime="20210603 14:31:04.716"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>value1</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.716" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<msg timestamp="20210603 14:31:04.717" level="FAIL">value1 != None</msg>
+<status status="FAIL" starttime="20210603 14:31:04.716" endtime="20210603 14:31:04.717"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.715" endtime="20210603 14:31:04.717" critical="yes">value1 != None</status>
+</test>
+<test id="s1-s2-t7" name="Check Default Param">
+<kw name="Load Squash Default Test Parameter" library="param_keywords">
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>UnavailableVar</arg>
+<arg>DefaultTestParam</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.717" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.717" endtime="20210603 14:31:04.717"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.718" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.717" endtime="20210603 14:31:04.718"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.717" endtime="20210603 14:31:04.718"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>Failure</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.718" level="FAIL">Failure != DefaultTestParam</msg>
+<status status="FAIL" starttime="20210603 14:31:04.718" endtime="20210603 14:31:04.718"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.717" endtime="20210603 14:31:04.718" critical="yes">Failure != DefaultTestParam</status>
+</test>
+<test id="s1-s2-t8" name="Check Default Param Failure">
+<kw name="Load Squash Default Test Parameter" library="param_keywords">
+<kw name="Get Test Param" library="squash_tf.TFParamService">
+<doc>Returns the test case parameter value if it is defined, None otherwise</doc>
+<arguments>
+<arg>UnavailableVar</arg>
+<arg>DefaultTestParam</arg>
+</arguments>
+<assign>
+<var>${PARAM}</var>
+</assign>
+<msg timestamp="20210603 14:31:04.719" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.719" endtime="20210603 14:31:04.719"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.719" level="INFO">${PARAM} = DefaultTestParam</msg>
+<status status="PASS" starttime="20210603 14:31:04.719" endtime="20210603 14:31:04.719"></status>
+</kw>
+<status status="PASS" starttime="20210603 14:31:04.718" endtime="20210603 14:31:04.719"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>Failure</arg>
+<arg>${PARAM}</arg>
+</arguments>
+<msg timestamp="20210603 14:31:04.719" level="FAIL">Failure != DefaultTestParam</msg>
+<status status="FAIL" starttime="20210603 14:31:04.719" endtime="20210603 14:31:04.720"></status>
+</kw>
+<status status="FAIL" starttime="20210603 14:31:04.718" endtime="20210603 14:31:04.720" critical="yes">Failure != DefaultTestParam</status>
+</test>
+<doc>Simple test for TFParamService in a Premium environment</doc>
+<status status="FAIL" starttime="20210603 14:31:04.705" endtime="20210603 14:31:04.720"></status>
+</suite>
+<status status="FAIL" starttime="20210603 14:31:04.677" endtime="20210603 14:31:04.721"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="12">Critical Tests</stat>
+<stat pass="1" fail="12">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="12" id="s1" name="robotTFParamCheck">robotTFParamCheck</stat>
+<stat pass="1" fail="4" id="s1-s1" name="Robot Community">robotTFParamCheck.Robot Community</stat>
+<stat pass="0" fail="8" id="s1-s2" name="Robot Premium">robotTFParamCheck.Robot Premium</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
