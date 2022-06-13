@@ -15,7 +15,7 @@
 #
 
 include:
-  - project: 'opentestfactory/ci-common/java-ci'
+  - project: 'henixdevelopment/open-source/opentestfactory/ci-common/java-ci'
     ref: main
     file: 'gitlab-ci-java.yml'
 variables:
