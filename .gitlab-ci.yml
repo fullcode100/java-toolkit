@@ -20,3 +20,20 @@ include:
     file: 'gitlab-ci-java.yml'
 variables:
   ARTIFACT_VISIBILITY: "public"
+
+# We trigger project (on main) which depends on me ( useful for nightly to have latest libraries).
+# We don't trigger "squash-tf-2-squash-tm-plugins" because "java-plugins" will.
+
+trigger-depends-on-me_java-plugins:
+  stage: post-deploy
+  trigger:
+    project: https://gitlab.com/henixdevelopment/open-source/opentestfactory/java-plugins
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+trigger-depends-on-me_jenkins:
+  stage: post-deploy
+  trigger:
+    project: https://gitlab.com/henixdevelopment/open-source/opentestfactory/jenkins-plugin
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
