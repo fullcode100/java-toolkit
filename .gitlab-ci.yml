@@ -26,6 +26,8 @@ variables:
 
 trigger-depends-on-me_java-plugins:
   stage: post-deploy
+  inherit:
+    variables: false
   trigger:
     project: henixdevelopment/open-source/opentestfactory/java-plugins
   rules:
@@ -33,6 +35,8 @@ trigger-depends-on-me_java-plugins:
 
 trigger-depends-on-me_jenkins:
   stage: post-deploy
+  inherit:
+    variables: false
   trigger:
     project: henixdevelopment/open-source/opentestfactory/jenkins-plugin
   rules:
