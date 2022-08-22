@@ -27,13 +27,13 @@ variables:
 trigger-depends-on-me_java-plugins:
   stage: post-deploy
   trigger:
-    project: https://gitlab.com/henixdevelopment/open-source/opentestfactory/java-plugins
+    project: henixdevelopment/open-source/opentestfactory/java-plugins
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
 trigger-depends-on-me_jenkins:
   stage: post-deploy
   trigger:
-    project: https://gitlab.com/henixdevelopment/open-source/opentestfactory/jenkins-plugin
+    project: henixdevelopment/open-source/opentestfactory/jenkins-plugin
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
