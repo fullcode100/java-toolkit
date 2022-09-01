@@ -29,7 +29,7 @@
         <maven.license.version>3.0</maven.license.version>
         <license.name>Apache-V2</license.name>
         <!-- version default -->
-        <revision>2.3.0</revision>
+        <revision>2.4.0</revision>
         <sha1></sha1>
         <changelist>-SNAPSHOT</changelist>
     </properties>
