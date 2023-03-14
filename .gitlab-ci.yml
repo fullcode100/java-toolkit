@@ -17,7 +17,7 @@
 include:
   - project: 'henixdevelopment/open-source/opentestfactory/ci-common/java-ci'
     ref: main
-    file: 'spring-java-ci.yml'
+    file: 'gitlab-ci-java.yml'
 variables:
   ARTIFACT_VISIBILITY: "public"
 
