@@ -21,7 +21,7 @@ Main principle: the harness is based on the JUnit framework. It uses [MockServer
 to setup a mock listening for callbacks from the system under test.
 As an outline, an integration test case consists in:
 
-1. Setting up expected answers using the ExpectedOutputReceiver instance provided by the test class
+1. Setting up expected answers by building an ExpectedOutputReceiver instance using the ExpectedOutputReceiverBuilder provided by the test class
 2. Sending one or more messages to the SUT using one of the dedicated sendTestMessage/sendTemplatedTestMessage test class methods.
 The harness supports sending several messages. Nevertheless, we should send only the messages 
 required for our current test case (most of the time we send only one message), so the test setup is clearly stated 
@@ -72,7 +72,7 @@ import java.util.UUID;
  */
 public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegrationTest {
 
-    /* 
+    /*
      * Port used by the receiver to check SUT reponse messages.
      * Each test class should use a different one as much as possible, because the SUT event bus is NOT
      * reinitialized after test cases or test classes completion, making AssertionFailed harder to read
@@ -80,23 +80,23 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
      * NB: choose port numbers >=1025, as the 1-1024 range is reserved to standard protocols and requires admin privileges.
      */
     public static final int RECEIVER_PORT = 1091;
-    
+
     public static final String EXECUTION_REPORT_BUS_SUBSCRIPTION = "/it/runsteps/executionReportBusSubscription.json";
 
-    public StepExecutionIntegrationTest(){
-        super(RECEIVER_PORT, 
-            /* 
-             *  Under here, entry point definition and authentication token references for the SUT - for 'real' integration tests this will be the event bus,
-             *  but isolated microservice tests may target the microservice in itself. 
-             *  In that case, the microservice endpoint and authentication token will have to be added to the test configuration file and referenced using 
-             *   - respectively - TestConfiguration.VALUES.getServiceBaseURL("my.service.url") and TestConfiguration.VALUES.getServiceAuthToken("my.service.auth-token").
-             *  The ".url" and ".auth-token" suffixes are defined respectively as the URL_KEY_SUFFIX and AUTH_TOKEN_KEY_SUFFIX constants.
-             */
-            TestConfiguration.VALUES.getServiceBaseURL(EVENTBUS_BASE_KEY+URL_KEY_SUFFIX),
-            TestConfiguration.VALUES.getServiceAuthToken(EVENTBUS_BASE_KEY+AUTH_TOKEN_KEY_SUFFIX),
-             /*
-             * Here comes a (limited in most use cases) list of resource names pointing to json sbuscription messages to automatically subscribe the mock receiver to the SUT event bus.
-             */
+    public StepExecutionIntegrationTest() {
+        super(RECEIVER_PORT,
+                /*
+                 *  Under here, entry point definition and authentication token references for the SUT - for 'real' integration tests this will be the event bus,
+                 *  but isolated microservice tests may target the microservice in itself.
+                 *  In that case, the microservice endpoint and authentication token will have to be added to the test configuration file and referenced using
+                 *   - respectively - TestConfiguration.VALUES.getServiceBaseURL("my.service.url") and TestConfiguration.VALUES.getServiceAuthToken("my.service.auth-token").
+                 *  The ".url" and ".auth-token" suffixes are defined respectively as the URL_KEY_SUFFIX and AUTH_TOKEN_KEY_SUFFIX constants.
+                 */
+                TestConfiguration.VALUES.getServiceBaseURL(EVENTBUS_BASE_KEY + URL_KEY_SUFFIX),
+                TestConfiguration.VALUES.getServiceAuthToken(EVENTBUS_BASE_KEY + AUTH_TOKEN_KEY_SUFFIX),
+                /*
+                 * Here comes a (limited in most use cases) list of resource names pointing to json sbuscription messages to automatically subscribe the mock receiver to the SUT event bus.
+                 */
                 EXECUTION_REPORT_BUS_SUBSCRIPTION
         );
     }
@@ -106,25 +106,26 @@ public class StepExecutionIntegrationTest extends AbstractMicroserviceIntegratio
     @Test //typical junit4 unit test signature here
     public void getExecutionReportFromDummyEnvForExecutionCommand() throws IOException, InterruptedException, URISyntaxException {
 
-        ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
+        ExpectedOutputReceiver receiver = getExpectedOutputReceiverBuilder()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString()) //each call to this adds a key-value mapping to substitute in message templates
-                .withExpectedRequestTemplate( /* This means the expected message is defined as a message template where place holder keys will be
-                                               * replaced with the values value defined above.*/
+                .withExpectedRequestTemplate( 
+                        /* This means the expected message is defined as a message template where placeholder keys will be
+                         * replaced with the values value defined above.*/
                         subscriptionPath(EXECUTION_REPORT_BUS_SUBSCRIPTION), //This function returns a computed path that is exposed as a variable to be used in the subscription envelope.
-                        useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json") //This is the expected message resource name
-                );
+                        useTestResource("/it/runsteps/expected/directRunStepExecutionReport1.json")) //This is the expected message resource name
+                .build();
 
         /*
          * Send a message to the SUT (in many tests this will be a tailored workflow targetting the test case) by resource name.
-         * The message is a template where placeholders will be replaced using the same mappings as the recevier (hence the receiver.mappings() parameter)
+         * The message is a template where placeholders will be replaced using the same mappings as the receiver (hence the receiver.mappings() parameter)
          */
-        sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json",receiver.mappings())
-            .thenExpectHttpOkResponseCode();
+        sendTemplatedTestMessage("/it/runsteps/input/directRunStepsWorkflow.json", receiver.mappings())
+                .thenExpectHttpOkResponseCode();
 
-         /*
-          * Here we ask the receiver to check received messages. 
-          * As these tests target external processes with asynchrounous reponses, the receiver will wait before checking. The delay is defined as a parameter.
-          */
+        /*
+         * Here we ask the receiver to check received messages.
+         * As these tests target external processes with asynchrounous reponses, the receiver will wait before checking. The delay is defined as a parameter.
+         */
         receiver.waitAndVerifyExpectedCall(DELAY_BEFORE_ASYNC_REQUEST_SEQUENCE_VERIFY);
     }
 }
@@ -174,6 +175,10 @@ The factor is expressed in percent of the base wait time. For example:
    add `sut.duration.factor.percent=130` to your configuration file.
 *  If it runs twice as quick,
    add `sut.duration.factor.percent=50` to your configuration file.
+
+Since version 2.6.0: if no 'unwanted' requests are declared, 
+OutputReceiver will check at regular interval (5 seconds by default) 
+if all requests were received so some execution time is saved.
 
 **Sample pom.xml file**
 
@@ -343,6 +348,15 @@ delay should be twice the ``DELAY_FOR_SSH`` using ``Duration.multiplyBy(2)``:
 The idea behind time bases is to make global adjustments of integration tests durations easier,
 but if the test case requires it, any java.time.Duration instance may be used.
 
+Since version 2.6.0, with the aim of saving test execution time, 
+and only if no 'unwanted' requests are specified, 
+OutputReceiver checks for incoming requests at regular interval. 
+The default interval is 5 seconds, but it can be modified with a second argument :
+
+```java
+    receiver.waitAndVerifyExpectedCall(DELAY_FOR_SSH.multiplyBy(5), Duration.ofSeconds(1));
+```
+
 <a name="using-variable-mappings" />
 
 ### Using variable mappings
@@ -409,8 +423,9 @@ To use a variable mapping, you need to do as follows:
 2. Add the key/value mapping to the registered mappings in your test
 
    ```java
-       ExpectedOutputReceiver receiver=getExpectedOutputReceiver()
+       ExpectedOutputReceiver receiver = getExpectedOutputReceiverBuilder()
                 .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
+                .build();
    ```
 
    **Please note** that you must add mappings **first**. 
@@ -610,7 +625,7 @@ To check these envelopes, use the receiver's `withIgnoreArrayElementOrder()` met
   public void shouldReturnAnAllureCollectorInput()
       throws IOException, URISyntaxException, InterruptedException {
     ExpectedOutputReceiver reportingReceiver =
-        getExpectedOutputReceiver()
+        getExpectedOutputReceiverBuilder()
             .withVariableMapping("workflow_uuid", UUID.randomUUID().toString())
             .withVariableMapping(
                 "name", "org.opentestfactory.plugins.result.aggregator.OTFResultAggregatorService")
@@ -623,7 +638,8 @@ To check these envelopes, use the receiver's `withIgnoreArrayElementOrder()` met
             .withExpectedRequestTemplate(
                 subscriptionPath(NOTIFY_INTEREST_SUBSCRIPTION_JSON),
                 useTestResource("/ti/common/workerTeardown.json"))
-            .withIgnoreArrayElementOrder();
+            .withIgnoreArrayElementOrder()
+            .build();
 
 ```
 
