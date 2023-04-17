@@ -1,0 +1,21 @@
+{
+  "apiVersion": "opentestfactory.org/v1alpha1",
+  "kind": "Notification",
+  "metadata": {
+    "workflow_id": "a08eea20-c31d-431f-8fd8-fed275349fce",
+    "name": "run33",
+    "attachment_origin": [
+      "96cf4a7a-82cd-4665-9366-5c6166fcafc0"
+    ]
+  },
+  "spec": {
+    "testResults": [
+      {
+        "id": "e2b58499-bf8f-4099-a086-3c11afadfbb0",
+        "name": "Gherkin#Addition",
+        "status": "SUCCESS",
+        "attachment_origin": "96cf4a7a-82cd-4665-9366-5c6166fcafc0"
+      }
+    ]
+  }
+}
